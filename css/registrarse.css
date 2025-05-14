@@ -31,7 +31,7 @@ input {
     padding: 10px 25px 10px 25px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     border: 2px solid rgb(231, 231, 231);
-    color: #B8B8B8;
+    color: black;
 }
 
 form {
@@ -48,8 +48,9 @@ form {
     margin-top: 20px;
     border: none;
     color: white;
+    background-color: #2095F2;
 }
 
 .btnRegistrar:hover {
-    background-color: #2095F2;
+    background-color: rgb(55, 55, 250);
 }
