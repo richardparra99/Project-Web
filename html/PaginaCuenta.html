@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Pagina Principal</title>
-        <link rel="stylesheet" href="../css/pagina_principal.css">
+        <title>Pagina Autenticada</title>
+        <link rel="stylesheet" href="../css/paginaCuenta.css">
     </head>
     <body>
         <main>
             <header class="navbar">
                 <img class="logo_facebook" src="../img/logo_facebook.png" alt="logo_facebook">
-                <h1 class="navbar__title">!Marketplace!</h1>
+                <h1 class="navbar__title">!Bienvenido!</h1>
                 <div class="navbar__buttons">
                     <nav class="menu">
                         <label class="menu-mobile-label" for="menu-switch">
@@ -19,28 +19,27 @@
                         </label>
                         <input id="menu-switch" type="checkbox">
                         <ul class="menu-links">
-                            <li>
-                                <button  class="navbar__buttons__i"><a href="../html/inicio_sesion.html">Iniciar sesion!</a></button>
+                            <li style="position: relative;">
+                                <button  class="navbar__buttons__i" id="btn-categoria"><a href="">Categoria</a></button>
+                                <div id="subcategorias" class="subcategorias oculto">
+                                    <button>Vehículos</button>
+                                    <button>Relojes</button>
+                                </div>
                             </li>
                             <li>
-                                <button class="navbar__buttons__r"><a href="../html/registrarse.html">Registrarse</a></button>
+                                <button class="navbar__buttons__r"><a href="">Guardados</a></button>
                             </li>
                         </ul>
                     </nav>
                 </div>
             </header>
             <hr>
-            <section>
-                <div class="container">
-                    <h1 class="container__title">Bienvenido a Marketplace</h1>
-                    <p class="container__text">Tu lugar para comprar y vender productos de manera fácil y rápida.</p>
-                </div>
-            </section>
             <footer>
                 <div class="footer">
                     <p>Desarrollado por: <a href="">Richard Parra Zegarra</a></p>
                 </div>
             </footer>
         </main>
+        <script src="../js/paginaCuenta.js"></script>
     </body>
 </html>
