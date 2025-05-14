@@ -1,0 +1,115 @@
+:root {
+    --color-azul: #196eb4;
+    --color-azul-hover: #033157;
+    --color-blanco: #FFFFFF;
+    --color-oscuro: #363636;
+    --color-oscuro-hover: #070707;
+    --tiempo-animacion:300ms;
+}
+
+main {
+    width: 100%;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo_facebook {
+    width: 3%;
+    height: 3%;
+}
+
+button {
+    justify-content: center;
+    border: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.navbar__title {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 10%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+button {
+    justify-content: space-between;
+    border: none;
+    border-radius: 2px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-left: -20px;
+    margin-top: 5px;
+
+}
+
+.navbar__buttons__i {
+    width: 100px;
+}
+
+div .navbar__buttons__r {
+    width: 100px;
+}
+
+.navbar__buttons__i,.navbar__buttons__r{
+    transition: background-color var(--tiempo-animacion) ease;
+}
+
+.navbar__buttons__i {
+    background-color: var(--color-azul);
+    
+}
+    .navbar__buttons__i:hover {
+        background-color: var(--color-azul-hover);
+    }
+
+.navbar__buttons__r {
+    background-color: var(--color-oscuro);
+}
+    .navbar__buttons__r:hover {
+        background-color: var(--color-oscuro-hover);
+    }
+
+.navbar__buttons a {
+    text-decoration: none;
+    color: white;
+}
+
+div .navbar__buttons__r a {
+    color: var(--color-blanco);
+}
+
+.menu-mobile-label {
+    display: none;
+}
+
+#menu-switch {
+    display: none;
+}
+
+.menu ul,
+.menu #menu-switch:checked+ul {
+    display: flex;
+}
+
+.menu li {
+    margin-left: 30px;
+    border-width: 0px;
+    text-align: left;
+}
+
+.menu-links{
+    text-decoration: none;
+    list-style-type:none;
+    padding: 0;
+    margin: 0;
+}
+
+hr {
+    height: 3px;
+    border: none;
+    background-color: #0180FF;
+}
