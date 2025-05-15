@@ -128,11 +128,11 @@ a {
 
 .subcategorias {
   position: absolute;
-  top: 100%; /* justo debajo del botón */
+  top: 100%; 
   left: 0;
   display: flex;
   flex-direction: column;
-  z-index: 1000; /* asegura que esté por encima de otros elementos */
+  z-index: 1000;
 }
 
 .subcategorias button {
