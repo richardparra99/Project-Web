@@ -11,6 +11,7 @@ hr {
     height: 3px;
     border: none;
     background-color: #0180FF;
+    margin-bottom: 1px;
 }
 
 footer {
@@ -19,6 +20,8 @@ footer {
     padding: 10px;
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    margin-bottom: 0px;
 }
 
 a {
