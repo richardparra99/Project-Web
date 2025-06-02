@@ -1,0 +1,80 @@
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.logo_perfil {
+    width: 5%;
+    height: 5%;
+}
+
+    /* Columna izquierda */
+.anuncios {
+    width: 30%;
+    border-right: 2px solid black;
+    padding: 10px;
+}
+
+.anuncios h2 {
+    text-align: center;
+}
+
+.anuncio {
+    padding: 15px;
+    border: 1px solid black;
+    margin-bottom: 10px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.chat-section {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    position: relative;
+}
+
+.chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: black;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+
+/* === Input inferior fijo === */
+.chat-input-container {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    background: #dcdcdc;
+    border-radius: 10px;
+    padding: 5px 10px;
+    position: sticky;
+    bottom: 0;
+}
+
+.chat-input {
+    border: none;
+    background: transparent;
+    flex: 1;
+    padding: 10px;
+    outline: none;
+}
+
+.send-btn {
+    background: green;
+    border: none;
+    padding: 10px;
+    border-radius: 10%;
+    color: white;
+}
+
+.oculto {
+  display: none;
+}

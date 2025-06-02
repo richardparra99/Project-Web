@@ -126,3 +126,11 @@ div .navbar__buttons__r a {
 .oculto {
   display: none;
 }
+
+.visible {
+  display: block;
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  z-index: 10;
+}
