@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Chats - Compras</title>
+
+        <link rel="stylesheet" href="../css/estilos_8/header.css">
+        <link rel="stylesheet" href="../css/estilos_8/section.css">
+        <link rel="stylesheet" href="../css/estilos_8/footer.css">
+    </head>
+    <body>
+        <main>
+            <header class="navbar">
+                <img class="logo_facebook" src="../img/logo_facebook.png" alt="logo_facebook">
+                <h1 class="navbar__title">!Marketplace - chat Compra!</h1>
+            </header>
+            <hr>
+
+            <div class="container">
+                <!-- Columna izquierda -->
+                <div class="anuncios">
+                    <h2>Anuncios</h2>
+                    <div class="anuncio">LAPTOP ASUS</div>
+                    <div class="anuncio">BMW X6</div>
+                    <div class="anuncio">MICROONDAS</div>
+                </div>
+            <!-- Columna derecha (Chat) -->
+            <section id="chatSection" class="chat-section oculto">
+                <div class="chat-header">
+                    <span id="userName" class="user-name">Juan Perez</span>
+                    <img class="logo_perfil" src="../img/imagen_user.png" alt="icono" />
+                </div>
+                <div class="chat-input-container">
+                    <input type="text" placeholder="Enviar mensaje!" class="chat-input" />
+                    <button class="send-btn"><img src="../img/send-icon.png" alt="enviar" /></button>
+                </div>
+            </section>
+
+        </main>
+        <footer>
+            <div class="footer">
+                <p>Desarrollado por: <a href="">Richard Parra Zegarra</a></p>
+            </div>
+        </footer>
+        <script src="../js/chatCompra.js"></script>
+    </body>
+</html>

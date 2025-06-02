@@ -1,0 +1,29 @@
+:root {
+    --color-azul: #196eb4;
+    --color-azul-hover: #033157;
+    --color-blanco: #FFFFFF;
+    --color-oscuro: #363636;
+    --color-oscuro-hover: #070707;
+    --tiempo-animacion:300ms;
+}
+
+hr {
+    height: 3px;
+    border: none;
+    background-color: #0180FF;
+}
+
+footer {
+    background-color: var(--color-azul);
+    color: var(--color-blanco);
+    padding: 10px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    margin-bottom: 0px;
+}
+
+a {
+    text-decoration: none;
+    color: var(--color-blanco);
+}
