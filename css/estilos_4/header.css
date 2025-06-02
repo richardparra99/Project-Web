@@ -134,3 +134,11 @@ div .navbar__buttons__r a {
   border: 1px solid #ccc;
   z-index: 10;
 }
+
+#subchats a .subchats-compras {
+    padding: 10px 25px 10px 23px;
+}
+
+#subchats a .subchats-ventas {
+    padding: 10px 30px 10px 30px;
+}

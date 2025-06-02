@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Chat - Venta</title>
+
+        <link rel="stylesheet" href="../css/estilos_9/header.css">
+        <link rel="stylesheet" href="../css/estilos_9/section.css">
+        <link rel="stylesheet" href="../css/estilos_9/footer.css">
+    </head>
+    <body>
+        <main>
+            <header class="navbar">
+                <img class="logo_facebook" src="../img/logo_facebook.png" alt="logo_facebook">
+                <h1 class="navbar__title">!Marketplace - chat Venta!</h1>
+            </header>
+            <hr>
+
+            <div class="chat-container">
+                <!-- Columna de anuncios -->
+                <div class="anuncios">
+                    <h3>Anuncios</h3>
+                    <ul id="lista-anuncios">
+                    <li onclick="mostrarChats('nike')">Nike air for one</li>
+                    <li onclick="mostrarChats('minoxidil')">Minoxidil</li>
+                    </ul>
+                </div>
+
+                <!-- Columna de chats por producto -->
+                <div class="chats-producto" id="chats-producto">
+                    <h3>Chats del producto</h3>
+                    <ul id="lista-chats"></ul>
+                </div>
+
+                <!-- Chat individual -->
+                <div class="chat-individual" id="chat-individual">
+                    <div class="chat-header" id="chat-nombre"></div>
+                    <div class="chat-mensajes" id="chat-mensajes">
+                    <p><strong>Pepito:</strong> Hola, ¿a cuánto está?</p>
+                    <p><strong>Tú:</strong> Bs. 100</p>
+                    </div>
+                    <div class="chat-input">
+                    <input type="text" id="mensaje" placeholder="Escribe tu mensaje...">
+                    <button onclick="enviarMensaje()">Enviar</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <footer>
+                <div class="footer">
+                    <p>Desarrollado por: <a href="">Richard Parra Zegarra</a></p>
+                </div>
+            </footer>
+        </main>
+        <script src="../js/chatVenta.js"></script>
+    </body>
+</html>
