@@ -18,6 +18,7 @@ footer {
     color: var(--color-blanco);
     padding: 10px;
     text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 a {

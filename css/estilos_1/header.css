@@ -12,13 +12,13 @@ main {
 }
 
 .navbar {
-    display: flex;
+    display: block;
     justify-content: space-between;
 }
 
 .logo_facebook {
-    width: 3%;
-    height: 3%;
+    width: 10%;
+    height: 10%;
 }
 
 button {
@@ -31,28 +31,20 @@ button {
 .navbar__title {
     margin-top: 0px;
     margin-bottom: 0px;
-    margin-left: 10%;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-left: 100px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 button {
     justify-content: space-between;
     border: none;
     border-radius: 2px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    margin-left: -20px;
     margin-top: 5px;
-
+    padding: 10px 72px 10px 72px;
+    margin-left: 50px;
 }
 
-.navbar__buttons__i {
-    width: 100px;
-}
 
-div .navbar__buttons__r {
-    width: 100px;
-}
 
 .navbar__buttons__i,.navbar__buttons__r{
     transition: background-color var(--tiempo-animacion) ease;
@@ -62,16 +54,28 @@ div .navbar__buttons__r {
     background-color: var(--color-azul);
     
 }
-    .navbar__buttons__i:hover {
-        background-color: var(--color-azul-hover);
-    }
+
+.navbar__buttons__l {
+    background-color: var(--color-azul);
+    padding: 10px 74px 10px 74px;
+}
+
+.navbar__buttons__l:hover {
+    background-color: var(--color-azul-hover);
+}
+
+.navbar__buttons__i:hover {
+    background-color: var(--color-azul-hover);
+}
 
 .navbar__buttons__r {
     background-color: var(--color-oscuro);
+    padding: 10px 80px 10px 80px;
 }
-    .navbar__buttons__r:hover {
-        background-color: var(--color-oscuro-hover);
-    }
+
+.navbar__buttons__r:hover {
+    background-color: var(--color-oscuro-hover);
+}
 
 .navbar__buttons a {
     text-decoration: none;
@@ -83,28 +87,275 @@ div .navbar__buttons__r a {
 }
 
 .menu-mobile-label {
-    display: none;
+    display: block;
+    border: 1px solid #196eb4;
+    width: 80px;
+    margin: 2px 2px 2px 2px;
+    padding: 8px 60px 8px 84px;
+    margin-left: 90px;
+    color: #196eb4;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 #menu-switch {
     display: none;
 }
 
-.menu ul,
 .menu #menu-switch:checked+ul {
-    display: flex;
+    display: block;
 }
 
 .menu li {
-    margin-left: 30px;
     border-width: 0px;
-    text-align: left;
 }
 
 .menu-links{
     text-decoration: none;
     list-style-type:none;
-    padding: 0;
-    margin: 0;
+    margin-top: 0px;
+}
+
+.menu ul {
+    display: none;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    main {
+        width: 100%;
+        height: auto;
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .logo_facebook {
+        width: 5%;
+        height: 5%;
+    }
+
+    button {
+        justify-content: center;
+        border: none;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding: 0;
+    }
+
+    .navbar__title {
+        margin-top: 0px;
+        margin-bottom: 0px;
+        margin-left: 25%;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    button {
+        justify-content: space-between;
+        border: none;
+        border-radius: 2px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        margin-left: -20px;
+        margin-top: 5px;
+    }
+
+    .navbar__buttons__i {
+        width: 100px;
+    }
+
+    div .navbar__buttons__r {
+        width: 100px;
+    }
+
+    .navbar__buttons__i,.navbar__buttons__r{
+        transition: background-color var(--tiempo-animacion) ease;
+    }
+
+    .navbar__buttons__i {
+        background-color: var(--color-azul);
+        
+    }
+    
+    .navbar__buttons__i:hover {
+        background-color: var(--color-azul-hover);
+    }
+
+    .navbar__buttons__r {
+        background-color: var(--color-oscuro);
+        padding: 10px 10px 10px 10px;
+    }
+    
+    .navbar__buttons__r:hover {
+        background-color: var(--color-oscuro-hover);
+    }
+
+    .navbar__buttons__l {
+        background-color: var(--color-azul);
+        padding: 10px 10px 10px 10px;
+    }
+
+    .navbar__buttons__l:hover {
+        background-color: var(--color-azul-hover);
+    }
+
+    .navbar__buttons a {
+        text-decoration: none;
+        color: white;
+    }
+
+    div .navbar__buttons__r a {
+        color: var(--color-blanco);
+    }
+
+    .menu-mobile-label {
+        display: block;
+        padding: 8px 3px 8px 16px;
+        margin: 0px 0px 0px 208px;
+    }
+
+    #menu-switch {
+        display: none;
+    }
+
+    .menu #menu-switch:checked+ul {
+        display: flex;
+    }
+
+    .menu li {
+        margin-left: 24px;
+        border-width: 0px;
+        text-align: left;
+    }
+
+    .menu-links{
+        text-decoration: none;
+        list-style-type:none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .menu ul {
+        display: none;
+    }
+}
+
+@media (min-width: 992px) {
+    main {
+        width: 100%;
+        height: auto;
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .logo_facebook {
+        width: 3%;
+        height: 3%;
+    }
+
+    button {
+        justify-content: center;
+        border: none;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding: 0;
+    }
+
+    .navbar__title {
+        margin-top: 0px;
+        margin-bottom: 0px;
+        margin-left: 10%;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    button {
+        justify-content: space-between;
+        border: none;
+        border-radius: 2px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        margin-left: -20px;
+        margin-top: 5px;
+    }
+
+    .navbar__buttons__i {
+        width: 100px;
+    }
+
+    div .navbar__buttons__r {
+        width: 100px;
+    }
+
+    .navbar__buttons__i,.navbar__buttons__r, .navbar__buttons__l{
+        transition: background-color var(--tiempo-animacion) ease;
+    }
+
+    .navbar__buttons__i {
+        background-color: var(--color-azul);
+        
+    }
+    
+    .navbar__buttons__i:hover {
+        background-color: var(--color-azul-hover);
+    }
+
+    .navbar__buttons__r {
+        background-color: var(--color-oscuro);
+        padding: 10px 10px 10px 10px;
+    }
+    
+    .navbar__buttons__r:hover {
+        background-color: var(--color-oscuro-hover);
+    }
+
+    .navbar__buttons__l {
+        background-color: var(--color-azul);
+        padding: 10px 10px 10px 10px;
+    }
+
+    .navbar__buttons__l:hover {
+        background-color: var(--color-azul-hover);
+    }
+
+    .navbar__buttons a {
+        text-decoration: none;
+        color: white;
+    }
+
+    div .navbar__buttons__r a {
+        color: var(--color-blanco);
+    }
+
+    .menu-mobile-label {
+        display: none;
+    }
+
+    #menu-switch {
+        display: none;
+    }
+
+    .menu #menu-switch:checked+ul {
+        display: flex;
+    }
+
+    .menu li {
+        margin-left: 30px;
+        border-width: 0px;
+        text-align: left;
+    }
+
+    .menu-links{
+        text-decoration: none;
+        list-style-type:none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .menu ul {
+        display: flex;
+    }
 }
 
