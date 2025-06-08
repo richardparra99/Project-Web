@@ -1,0 +1,74 @@
+:root {
+    --color-azul: #196eb4;
+    --color-azul-hover: #033157;
+    --color-blanco: #FFFFFF;
+    --color-oscuro: #363636;
+    --color-oscuro-hover: #070707;
+    --tiempo-animacion:300ms;
+}
+
+.container {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.section_anuncio h2 {
+    display: none;
+}
+
+.section_anuncio {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.section_anuncio_articulo img {
+    width: 25%;
+}
+
+.section_anuncio_articulo {
+    text-align: center;
+    border: 1px solid #196eb4;
+    margin-bottom: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.section_anuncio_articulo h3 {
+    text-align: center;
+}
+
+.caja_botones {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+}
+
+#imagen-apple {
+    margin-top: 5px;
+}
+
+#btn-save {
+    padding: 10px 20px 10px 20px;
+    margin-bottom: 5px;
+    background-color: var(--color-oscuro);
+    color: var(--color-blanco);
+}
+
+#btn-mensaje {
+    padding: 10px 20px 10px 20px;
+    margin-bottom: 5px;
+    background-color: var(--color-azul);
+    color: var(--color-blanco);
+}
+
+#btn-mensaje:hover {
+    background-color: var(--color-azul-hover);
+}
+
+#btn-save:hover {
+    background-color: var(--color-oscuro-hover);
+}
+
+#btn-save, #btn-mensaje {
+    transition: var(--tiempo-animacion);
+}

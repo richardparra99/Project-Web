@@ -6,7 +6,9 @@
         <title>Pagina Principal</title>
 
         <link rel="stylesheet" href="../css/estilos_1/header.css">
+        <link rel="stylesheet" href="../css/estilos_1/section.css">
         <link rel="stylesheet" href="../css/estilos_1/footer.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     </head>
     <body>
         <main>
@@ -25,6 +27,9 @@
                                 <button  class="navbar__buttons__i"><a href="../html/inicio_sesion.html">Iniciar sesion!</a></button>
                             </li>
                             <li>
+                                <button class="navbar__buttons__l"><a href="../html/lista_anuncio.html">Lista anuncio</a></button>
+                            </li>
+                            <li>
                                 <button class="navbar__buttons__r"><a href="../html/registrarse.html">Registrarse</a></button>
                             </li>
                         </ul>
@@ -32,12 +37,37 @@
                 </div>
             </header>
             <hr>
+
             <section>
                 <div class="container">
                     <h1 class="container__title">Bienvenido a Marketplace</h1>
                     <p class="container__text">Tu lugar para comprar y vender productos de manera fácil y rápida.</p>
                 </div>
             </section>
+
+
+            <section class="section_anuncio">
+                <h2>Anuncios habilitados</h2>
+                <article class="section_anuncio_articulo">
+                    <img src="../img/asus_g6143u.png" alt="imagen-laptop" id="imagen-laptop">
+                    <h3>Laptop Rog Asus</h3>
+                    <p>22.000 bs.-</p>
+                    <div class="caja_botones">
+                        <button id="btn-save">Guardar</button>
+                        <button id="btn-mensaje">Mensaje</button>
+                    </div>
+                </article>
+                <article class="section_anuncio_articulo">
+                    <img src="../img/Apple_iPhone_16_Pro_Max.png" alt="imagen-apple" id="imagen-apple">
+                    <h3>Apple Iphone 16 Pro Max</h3>
+                    <p>18.000 bs.-</p>
+                    <div class="caja_botones">
+                        <button id="btn-save">Guardar</button>
+                        <button id="btn-mensaje">Mensaje</button>
+                    </div>
+                </article>
+            </section>
+
             <footer>
                 <div class="footer">
                     <p>Desarrollado por: <a href="">Richard Parra Zegarra</a></p>
