@@ -17,13 +17,17 @@
             </header>
             <hr>
 
-            <div class="caja-contenedor">
-                <img src="" alt="">
-                <h2>producto 1</h2>
-                <p>precio</p>
-                <button id="btn-mensaje">Mensaje</button>
-                <button id="btn-guardar">Guardar</button>
-            </div>
+            <section id="vista-individual" style="display: none;">
+                <div class="caja-contenedor">
+                    <img id="vista-img" src="" alt="imagen producto">
+                    <h2 id="vista-nombre"></h2>
+                    <p id="vista-precio"></p>
+                    <button id="btn-mensaje">Mensaje</button>
+                    <button id="btn-guardar">Guardar</button>
+                    <br><br>
+                    <button onclick="volverALaLista()">Volver</button>
+                </div>
+            </section>
 
             <footer>
                 <div class="footer">

@@ -1,0 +1,157 @@
+
+.section_anuncio_2 {
+    display: block;
+    justify-content: space-around;
+    text-align: center;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+.section_anuncio_2 h2 {
+    display: none;
+}
+
+.section_anuncio_articulo_2 {
+    text-align: center;
+    border: 1px solid #196eb4;
+    margin-bottom: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    width: 100%;
+}
+
+.imagen_reloj {
+    height: 145px;
+}
+
+.imagen_stanley {
+    height: 135px;
+}
+
+.imagen_samsung {
+    margin-top: 10px;
+    height: 130px;
+}
+
+.imagen_reloj_samung {
+    margin-top: 10px;
+    height: 105px;
+}
+
+.imagen_laptop {
+    height: 110px;
+}
+
+.imagen_lego {
+    margin-top: 5px;
+    width: 100px;
+}
+
+.imagen_condones {
+    height: 100px;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .section_anuncio_2 {
+        display: flex;
+        justify-content: space-around;
+        text-align: center;
+        margin-top: 20px;
+        gap: 10px;
+    }
+
+    .section_anuncio_2 h2 {
+        display: none;
+    }
+
+    .section_anuncio_articulo_2 {
+        text-align: center;
+        border: 1px solid #196eb4;
+        margin-bottom: 10px;
+        font-family: Arial, Helvetica, sans-serif;
+        width: 46.5%;
+    }
+
+    .imagen_reloj {
+        height: 145px;
+    }
+
+    .imagen_stanley {
+        height: 135px;
+    }
+
+    .imagen_samsung {
+        margin-top: 10px;
+        height: 130px;
+    }
+
+    .imagen_reloj_samung {
+        margin-top: 10px;
+        height: 105px;
+    }
+
+    .imagen_laptop {
+        height: 110px;
+    }
+
+    .imagen_lego {
+        margin-top: 5px;
+        width: 100px;
+    }
+
+    .imagen_condones {
+        height: 100px;
+    }
+}
+
+@media (min-width: 992px) {
+    .section_anuncio_2 {
+        display: flex;
+        justify-content: space-around;
+        text-align: center;
+        margin-top: 20px;
+        gap: 10px;
+    }
+
+    .section_anuncio_2 h2 {
+        display: none;
+    }
+
+    .section_anuncio_articulo_2 {
+        text-align: center;
+        border: 1px solid #196eb4;
+        margin-bottom: 10px;
+        font-family: Arial, Helvetica, sans-serif;
+        width: 80%;
+    }
+
+    .imagen_reloj {
+        height: 145px;
+    }
+
+    .imagen_stanley {
+        height: 135px;
+    }
+
+    .imagen_samsung {
+        margin-top: 10px;
+        height: 130px;
+    }
+
+    .imagen_reloj_samung {
+        margin-top: 10px;
+        height: 105px;
+    }
+
+    .imagen_laptop {
+        height: 110px;
+    }
+
+    .imagen_lego {
+        margin-top: 5px;
+        width: 100px;
+    }
+
+    .imagen_condones {
+        height: 100px;
+    }
+}
