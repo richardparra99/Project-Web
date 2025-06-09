@@ -22,6 +22,7 @@
     justify-content: space-around;
     text-align: center;
     margin-top: 20px;
+    gap: 10px;
 }
 
 .section_anuncio_articulo img {
@@ -36,14 +37,16 @@
 }
 
 .section_anuncio_articulo h3 {
+    margin-top: 0px;
     text-align: center;
 }
 
 .caja_botones {
     display: flex;
     justify-content: center;
-    margin-right: 50px;
+    gap: 20px;
 }
+
 
 #imagen-apple {
     margin-top: 5px;
@@ -89,6 +92,32 @@
     transition: var(--tiempo-animacion);
 }
 
+form {
+  display: flex;
+  justify-content: center;
+  margin: 20px auto;
+}
+
+input[type="search"] {
+  padding: 8px;
+  width: 200px;
+  border: 1px solid #196eb4;
+  border-radius: 4px 0 0 4px;
+}
+
+button {
+  padding: 8px 12px;
+  background-color: #196eb4;
+  color: white;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #033157;
+}
+
 @media (min-width: 768px) and (max-width: 991px) {
     .container {
         font-family: Arial, Helvetica, sans-serif;
@@ -103,6 +132,7 @@
         justify-content: space-around;
         text-align: center;
         margin-top: 20px;
+        gap: 10px;
     }
 
     .section_anuncio_articulo img {
@@ -114,19 +144,19 @@
         border: 1px solid #196eb4;
         margin-bottom: 10px;
         font-family: Arial, Helvetica, sans-serif;
-        width: 45%;
+        width: 250px;
     }
 
     .section_anuncio_articulo h3 {
+        margin-top: 0px;
         text-align: center;
     }
 
     .caja_botones {
-        display: flex;
+        display: block;
         justify-content: center;
-        gap: 30px;
-        margin-left: 80px;
     }
+
 
     #imagen-apple {
         margin-top: 5px;
@@ -171,7 +201,35 @@
     .btn_save, .btn_mensaje, .btn_view {
         transition: var(--tiempo-animacion);
     }
+
+    form {
+    display: flex;
+    justify-content: center;
+    margin: 20px auto;
+    }
+
+    input[type="search"] {
+    padding: 8px;
+    width: 200px;
+    border: 1px solid #196eb4;
+    border-radius: 4px 0 0 4px;
+    }
+
+    button {
+    padding: 8px 12px;
+    background-color: #196eb4;
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    }
+
+    button:hover {
+    background-color: #033157;
+    }
+
 }
+
 
 @media (min-width: 992px) {
     .container {
@@ -187,6 +245,7 @@
         justify-content: space-around;
         text-align: center;
         margin-top: 20px;
+        gap: 10px;
     }
 
     .section_anuncio_articulo img {
@@ -198,19 +257,20 @@
         border: 1px solid #196eb4;
         margin-bottom: 10px;
         font-family: Arial, Helvetica, sans-serif;
+        width: 50%;
     }
 
     .section_anuncio_articulo h3 {
+        margin-top: 0px;
         text-align: center;
     }
 
     .caja_botones {
         display: flex;
         justify-content: center;
-        gap: 30px;
-        margin-right: 0px;
-        margin-left: 30px;
+        gap: 20px;
     }
+
 
     #imagen-apple {
         margin-top: 5px;
@@ -254,6 +314,32 @@
 
     .btn_save, .btn_mensaje, .btn_view {
         transition: var(--tiempo-animacion);
+    }
+
+    form {
+    display: flex;
+    justify-content: center;
+    margin: 20px auto;
+    }
+
+    input[type="search"] {
+    padding: 8px;
+    width: 200px;
+    border: 1px solid #196eb4;
+    border-radius: 4px 0 0 4px;
+    }
+
+    button {
+    padding: 8px 12px;
+    background-color: #196eb4;
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    }
+
+    button:hover {
+    background-color: #033157;
     }
 
 }
