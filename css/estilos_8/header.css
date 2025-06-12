@@ -17,13 +17,36 @@ main {
 }
 
 .logo_facebook {
-    width: 3%;
-    height: 3%;
+    width: 10%;
+    height: 10%;
 }
 
 .navbar__title {
-    margin-top: 0px;
-    margin-bottom: 0px;
-    margin-right: 450px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-right: 55px;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+@media (min-width: 992px) {
+    main {
+        width: 100%;
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .logo_facebook {
+        width: 3%;
+        height: 3%;
+    }
+
+    .navbar__title {
+        margin-top: 0px;
+        margin-bottom: 0px;
+        margin-right: 450px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
 }
