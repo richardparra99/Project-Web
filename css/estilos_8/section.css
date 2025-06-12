@@ -10,8 +10,8 @@
 
     /* Columna izquierda */
 .anuncios {
-    width: 30%;
-    border-right: 2px solid black;
+    width: 32%;
+    border-right: 2px solid #0180FF;
     padding: 10px;
 }
 
@@ -21,7 +21,7 @@
 
 .anuncio {
     padding: 15px;
-    border: 1px solid black;
+    border: 1px solid #0180FF;
     margin-bottom: 10px;
     text-align: center;
     cursor: pointer;
@@ -29,7 +29,7 @@
 
 .chat-section {
     width: 70%;
-    display: flex;
+    display: block;
     flex-direction: column;
     padding: 20px;
     position: relative;
@@ -44,12 +44,13 @@
     padding: 15px;
     border-radius: 5px;
     margin-bottom: 20px;
+    width: 75%;
 }
 
 
 /* === Input inferior fijo === */
 .chat-input-container {
-    margin-top: auto;
+    margin-top: 760px;
     display: flex;
     justify-content: space-between;
     background: #dcdcdc;
@@ -77,4 +78,88 @@
 
 .oculto {
   display: none;
+}
+
+@media (min-width: 992px) {
+    .container {
+        display: flex;
+        height: 100vh;
+    }
+
+    .logo_perfil {
+        width: 5%;
+        height: 5%;
+    }
+
+        /* Columna izquierda */
+    .anuncios {
+        width: 30%;
+        border-right: 2px solid #0180FF;
+        padding: 10px;
+    }
+
+    .anuncios h2 {
+        text-align: center;
+    }
+
+    .anuncio {
+        padding: 15px;
+        border: 1px solid #0180FF;
+        margin-bottom: 10px;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .chat-section {
+        width: 70%;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        position: relative;
+    }
+
+    .chat-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: black;
+        color: white;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+
+
+    /* === Input inferior fijo === */
+    .chat-input-container {
+        margin-top: auto;
+        display: flex;
+        justify-content: space-between;
+        background: #dcdcdc;
+        border-radius: 10px;
+        padding: 5px 10px;
+        position: sticky;
+        bottom: 0;
+    }
+
+    .chat-input {
+        border: none;
+        background: transparent;
+        flex: 1;
+        padding: 10px;
+        outline: none;
+    }
+
+    .send-btn {
+        background: green;
+        border: none;
+        padding: 10px;
+        border-radius: 10%;
+        color: white;
+    }
+
+    .oculto {
+    display: none;
+    }
+
 }
