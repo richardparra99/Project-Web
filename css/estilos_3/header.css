@@ -1,3 +1,13 @@
+:root {
+    --color-azul: #196eb4;
+    --color-azul-hover: #033157;
+    --color-blanco: #FFFFFF;
+    --color-oscuro: #363636;
+    --color-oscuro-hover: #070707;
+    --tiempo-animacion:300ms;
+}
+
+
 .caja_principal {
     width: 300px;
     height: 300px;
@@ -46,5 +56,9 @@ form {
 }
 
 .btnAcceder:hover {
-    background-color: rgb(55, 55, 250);
+    background-color: var(--color-azul-hover);
+}
+
+.btnAcceder {
+    transition: background-color var(--tiempo-animacion) ease;
 }
