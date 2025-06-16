@@ -1,0 +1,20 @@
+{
+  "name": "project-web",
+  "version": "1.0.0",
+  "description": "aplicacion marketplace",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "Proyect-Web"
+  },
+  "author": "Richard Parra Zegarra",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "pg": "^8.16.0"
+  }
+}
