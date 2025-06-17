@@ -35,7 +35,7 @@ document.getElementById('loginForm').addEventListener('submit', async function (
             alert('Inicio de sesión exitoso');
             // Puedes guardar el ID o token si es necesario
             localStorage.setItem('usuarioId', result.id);
-            window.location.href = '../html/pagina_cuenta.html';
+            window.location.href = 'index.html';
         } else {
             alert(result.mensaje || 'Credenciales inválidas');
         }
