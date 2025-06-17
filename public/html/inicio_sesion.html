@@ -7,17 +7,23 @@
         
         <link rel="stylesheet" href="../css/estilos_3/all.css">
         <link rel="stylesheet" href="../css/estilos_3/header.css">
+        <link rel="stylesheet" href="../css/estilos_3/section.css">
     </head>
     <body>
         <div class="caja_principal">
             <div class="caja_contenido">
                 <h1>Iniciar sesion</h1>
-                <form action="pagina_cuenta.html" method="get">
-                    <input type="email" placeholder="Ingrese su email">
-                    <input type="password" placeholder="Ingrese su contraseña">
+                <form id="loginForm">
+                    <input type="email" id="email" placeholder="Ingrese su email">
+                    <span class="error-text" id="error-email"></span>
+
+                    <input type="password" id="password" placeholder="Ingrese su contraseña">
+                    <span class="error-text" id="error-password"></span>
+
                     <input class="btnAcceder" type="submit" value="Acceder">
                 </form>
             </div>
         </div>
+        <script src="../js/login.js"></script>
     </body>
 </html>

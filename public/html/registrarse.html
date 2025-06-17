@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Registrarse</title>
+        
+        <link rel="stylesheet" href="../css/estilos_5/all.css">
+        <link rel="stylesheet" href="../css/estilos_5/header.css">
+        <link rel="stylesheet" href="../css/estilos_5/sectio.css">
+    </head>
+    <body>
+        <div class="caja_principal">
+            <div class="caja_contenido">
+                <h1>Registrarse!</h1>
+                <form id="registroForm">
+                    <input type="text" id="nombre" placeholder="Ingrese nombre completo">
+                    <span class="error-text" id="error-nombre"></span>
+
+                    <input type="text" id="email" placeholder="Ingrese su email">
+                    <span class="error-text" id="error-email"></span>
+
+                    <input type="password" id="password" placeholder="Ingrese su contraseña">
+                    <span class="error-text" id="error-password"></span>
+
+                    <input class="btnRegistrar" type="submit" value="Registrarse">
+                </form>
+            </div>
+        </div>
+        <script src="../js/registro.js"></script>
+    </body>
+</html>
