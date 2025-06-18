@@ -305,6 +305,7 @@ div .navbar__buttons__r a {
     .navbar__buttons__r {
         background-color: var(--color-oscuro);
         padding: 10px 10px 10px 10px;
+        color: white;
     }
     
     .navbar__buttons__r:hover {
@@ -358,4 +359,3 @@ div .navbar__buttons__r a {
         display: flex;
     }
 }
-

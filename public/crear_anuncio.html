@@ -12,16 +12,17 @@
         <div class="caja_principal">
             <div class="caja_contenido">
                 <h1>Nuevo Anuncio</h1>
-                <form action="">
-                    <input type="file" placeholder="agregar imagen">
-                    <input class="btnTitulo" type="text" placeholder="Ingrese el título">
-                    <input class="btnDescripcion" type="text" placeholder="Ingrese la descripción">
-                    <input class="btnPrecio" type="text" placeholder="Ingrese el precio">
-                    <input class="btnCategoria" type="text" placeholder="Ingrese la categoría">
+                <form id="formCrearAnuncio" enctype="multipart/form-data">
+                    <input type="file" id="imagen" multiple placeholder="agregar imagen">
+                    <input class="btnTitulo" id="titulo" type="text" placeholder="Ingrese el título">
+                    <input class="btnDescripcion" id="descripcion" type="text" placeholder="Ingrese la descripción">
+                    <input class="btnPrecio" id="precio" type="text" placeholder="Ingrese el precio">
+                    <input class="btnCategoria" id="categoria" type="text" placeholder="Ingrese la categoría">
                     <input class="btnCrear" type="submit" value="Crear Anuncio">
-                    <button class="btnCancelar"><a href="">Cancelar</a></button>
+                    <button class="btnCancelar"><a href="index.html">Cancelar</a></button>
                 </form>
             </div>
         </div>
+        <script src="js/crear_anuncio.js"></script>
     </body>
 </html>
