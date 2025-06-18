@@ -5,6 +5,7 @@ const pool = require('./conexion/db');
 
 // Importar rutas
 const usuarioRoutes = require('./routes/usuario.routes');
+const anuncioRoutes = require('./routes/anuncio.routes');
 
 app.use(express.json());
 
@@ -13,6 +14,7 @@ app.use(express.static('public'));
 
 // Usar rutas de usuario
 app.use('/usuarios', usuarioRoutes);
+app.use('/anuncios', anuncioRoutes);
 
 // Iniciar servidor
 const port = process.env.PORT || 3001;

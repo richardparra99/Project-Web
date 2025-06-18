@@ -405,4 +405,46 @@
     .oculto {
         display: none;
     }
+
+    #mis-anuncios {
+        margin-left: 65px;
+    }
+
+    .caja_botones {
+        margin-bottom: 5px;
+    }
+
+    .btn_editar {
+        background-color: #FFF091;
+        padding: 10px 20px 10px 20px;
+        color: white;
+    }
+
+    .btn_toggle_estado {
+        background-color: #FFA360;
+        padding: 10px 20px 10px 20px;
+        color: white;
+    }
+
+    .btn_eliminar {
+        background-color: #FF7676;
+        padding: 10px 20px 10px 20px;
+        color: white;
+    }
+
+    .btn_editar:hover {
+        background-color: #FFD401;
+    }
+
+    .btn_toggle_estado:hover {
+        background-color: #FC4B08;
+    }
+
+    .btn_eliminar:hover {
+        background-color: #E00000;
+    }
+
+    .btn_eliminar, .btn_editar, .btn_toggle_estado {
+        transition: var(--tiempo-animacion);
+    }
 }
