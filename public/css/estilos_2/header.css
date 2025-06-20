@@ -1,6 +1,18 @@
+:root {
+    --color-azul: #196eb4;
+    --color-azul-hover: #033157;
+    --color-blanco: #FFFFFF;
+    --color-oscuro: #363636;
+    --color-oscuro-hover: #070707;
+    --color-rojo: #FF7A7B;
+    --color-rojo-hover: #FF2929;
+    --tiempo-animacion:300ms;
+}
+
+
 .caja_principal {
     width: 400px;
-    height: 550px;
+    height: 580px;
     text-align: center;
     background-color: white;
     margin-top: 20px;
@@ -62,11 +74,15 @@ form {
     margin-top: 20px;
     border: none;
     color: white;
-    background-color: #2095F2;
+    background-color: var(--color-azul);
 }
 
 .btnCrear:hover {
-    background-color:#033157;
+    background-color: var(--color-azul-hover);
+}
+
+.btnCrear, .btnCancelar {
+    transition: background-color var(--tiempo-animacion) ease;
 }
 
 button, a {
@@ -81,10 +97,10 @@ button, a {
     border: 0px solid;
     margin-top: 10px;
     border: none;
-    background-color: red;
+    background-color: var(--color-rojo);
     padding: 10px 25px 10px 25px; 
 }
 
 .btnCancelar:hover {
-    background-color: rgb(88, 6, 6);
+    background-color: var(--color-rojo-hover) ;
 }

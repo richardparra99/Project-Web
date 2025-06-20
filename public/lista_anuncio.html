@@ -5,160 +5,52 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Lista Anuncio</title>
 
-        <link rel="stylesheet" href="css/estilos_11/header.css">
+        <link rel="stylesheet" href="css/estilos_1/header.css">
+        <link rel="stylesheet" href="css/estilos_1/section.css">
         <link rel="stylesheet" href="css/estilos_11/section.css">
         <link rel="stylesheet" href="css/estilos_11/section_2.css">
         <link rel="stylesheet" href="css/estilos_11/modal.css">
         <link rel="stylesheet" href="css/estilos_11/footer.css">
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     </head>
     <body>
         <main>
             <header class="navbar">
                 <img class="logo_facebook" src="img/logo_facebook.png" alt="logo_facebook">
-                <h1 class="navbar__title">!Marketplace listas Anuncio!</h1>
+                <h1 class="navbar__title">!lista anuncio!</h1>
+                <div class="navbar__buttons">
+                    <nav class="menu">
+                        <label class="menu-mobile-label" for="menu-switch">
+                            <i class="fa-solid fa-bars"></i>
+                            Menu
+                        </label>
+                        <input id="menu-switch" type="checkbox">
+                        <ul class="menu-links" id="menu-links">
+                            <li>
+                                <button  class="navbar__buttons__i"><a href="inicio_sesion.html">Iniciar sesion!</a></button>
+                            </li>
+                            <li>
+                                <button class="navbar__buttons__l"><a href="lista_anuncio.html">Lista anuncio</a></button>
+                            </li>
+                            <li>
+                                <button class="navbar__buttons__r"><a href="registrarse.html">Registrarse</a></button>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
             </header>
             <hr>
 
             <form action="#" method="get">
                 <input type="search" placeholder="Buscar productos...">
-                <button type="submit">Buscar</button>
+                <button id="btnBuscar" type="submit">Buscar</button>
             </form>
 
             <section class="section_anuncio">
                 <h2>Anuncios habilitados</h2>
-                <article class="section_anuncio_articulo" data-descripcion="Laptop gamer con procesador Intel i9, 32GB RAM y tarjeta RTX 4080. Ideal para juegos y trabajo pesado.">
-                    <img src="img/asus_g6143u.png" alt="imagen-laptop" id="imagen-laptop">
-                    <h3>Laptop Rog Asus</h3>
-                    <p>22.000 bs.-</p>
-                    <div class="caja_botones">
-                        <button class="btn_save">Guardar</button>
-                        <button class="btn_mensaje">Mensaje</button>
-                        <button class="btn_view">Ver</button>
-                    </div>
-                </article>
-                <article class="section_anuncio_articulo" data-descripcion="El nuevo iPhone 16 Pro Max con cámara de 48MP, chip A18 y pantalla OLED de 6.9 pulgadas. Rendimiento de otro nivel.">
-                    <img src="img/Apple_iPhone_16_Pro_Max.png" alt="imagen-apple" id="imagen-apple">
-                    <h3>Apple Iphone 16 Pro Max</h3>
-                    <p>18.000 bs.-</p>
-                    <div class="caja_botones">
-                        <button class="btn_save">Guardar</button>
-                        <button class="btn_mensaje">Mensaje</button>
-                        <button class="btn_view">Ver</button>
-                    </div>
-                </article>
-                <article class="section_anuncio_articulo" data-descripcion="Reloj de lujo Richard Mille, diseño exclusivo y materiales premium como titanio y zafiro. Pieza de colección.">
-                    <img src="img/klipartz.com.png" alt="imagen-reloj" id="imagen-reloj">
-                    <h3>Richard Mille</h3>
-                    <p>180.000 $.-</p>
-                    <div class="caja_botones">
-                        <button class="btn_save">Guardar</button>
-                        <button class="btn_mensaje">Mensaje</button>
-                        <button class="btn_view">Ver</button>
-                    </div>
-                </article>
+                <div id="contenedor-lista-anuncios"></div>
             </section>
 
-            <section class="section_anuncio_2">
-                <h2>Anuncios habilitados</h2>
-                <article class="section_anuncio_articulo_2" data-descripcion="Reloj Diesel Mr. Daddy 2.0, cronógrafo robusto con estilo industrial y correa de cuero negra.">
-                    <img src="img/reloj_diesel.png" alt="imagen-laptop" class="imagen_reloj">
-                    <h3>Diesel mr. Daddy 2.0</h3>
-                    <p>2.000 bs.-</p>
-                    <div class="caja_botones">
-                        <button class="btn_save">Guardar</button>
-                        <button class="btn_mensaje">Mensaje</button>
-                        <button class="btn_view">Ver</button>
-                    </div>
-                </article>
-                <article class="section_anuncio_articulo_2" data-descripcion="Botella térmica Stanley original de acero inoxidable, conserva bebidas frías o calientes por más de 24h.">
-                    <img src="img/stanley_botella_termica.png" alt="imagen-stanley" class="imagen_stanley">
-                    <h3>Stanley Botella Termica</h3>
-                    <p>600 bs.-</p>
-                    <div class="caja_botones">
-                        <button class="btn_save">Guardar</button>
-                        <button class="btn_mensaje">Mensaje</button>
-                        <button class="btn_view">Ver</button>
-                    </div>
-                </article>
-                <article class="section_anuncio_articulo_2" data-descripcion="Smartphone Samsung Galaxy A55 con pantalla AMOLED de 6.6'', triple cámara y batería de larga duración.">
-                    <img src="img/samsung_55.png" alt="imagen-samsung" class="imagen_samsung">
-                    <h3>Samsung A55</h3>
-                    <p>3000 bs.-</p>
-                    <div class="caja_botones">
-                        <button class="btn_save">Guardar</button>
-                        <button class="btn_mensaje">Mensaje</button>
-                        <button class="btn_view">Ver</button>
-                    </div>
-                </article>
-            </section>
-            
-            <section class="section_anuncio_2">
-                <h2>Anuncios habilitados</h2>
-                <article class="section_anuncio_articulo_2" data-descripcion="Reloj inteligente Samsung Watch 7 con monitoreo de salud, GPS integrado y resistencia al agua.">
-                    <img src="img/samsung_watch7.jpg" alt="imagen-reloj" class="imagen_reloj_samung">
-                    <h3>Samsung Watc 7</h3>
-                    <p>7000 bs.-</p>
-                    <div class="caja_botones">
-                        <button class="btn_save">Guardar</button>
-                        <button class="btn_mensaje">Mensaje</button>
-                        <button class="btn_view">Ver</button>
-                    </div>
-                </article>
-                <article class="section_anuncio_articulo_2" data-descripcion="Apple Watch SE 10, con funciones de entrenamiento, llamadas, mensajes y detección de caídas.">
-                    <img src="img/apple_wacthSe10.jpg" alt="imagen-apple" class="imagen_reloj_samung">
-                    <h3>Apple Watch SE 10</h3>
-                    <p>5.000 bs.-</p>
-                    <div class="caja_botones">
-                        <button class="btn_save">Guardar</button>
-                        <button class="btn_mensaje">Mensaje</button>
-                        <button class="btn_view">Ver</button>
-                    </div>
-                </article>
-                <article class="section_anuncio_articulo_2" data-descripcion="Laptop gamer ASUS TUF Dash F15, RTX 4060, 16GB RAM y pantalla 144Hz para gaming competitivo.">
-                    <img src="img/tuf_gaming_DashF15.png" alt="imagen-laptop" class="imagen_laptop">
-                    <h3>TUF Gaming Dash F15</h3>
-                    <p>18.000 bs.-</p>
-                    <div class="caja_botones">
-                        <button class="btn_save">Guardar</button>
-                        <button class="btn_mensaje">Mensaje</button>
-                        <button class="btn_view">Ver</button>
-                    </div>
-                </article>
-            </section>
-
-            <section class="section_anuncio_2">
-                <h2>Anuncios habilitados</h2>
-                <article class="section_anuncio_articulo_2" data-descripcion="Set LEGO de Batimóvil con diseño clásico, ideal para coleccionistas o fanáticos de DC.">
-                    <img src="img/lego_autoBatman.jpg" alt="imagen-lego" class="imagen_lego">
-                    <h3>Lego Batman Auto</h3>
-                    <p>200 bs.-</p>
-                    <div class="caja_botones">
-                        <button class="btn_save">Guardar</button>
-                        <button class="btn_mensaje">Mensaje</button>
-                        <button class="btn_view">Ver</button>
-                    </div>
-                </article>
-                <article class="section_anuncio_articulo_2" data-descripcion="LEGO Lamborghini Sián FKP 37, réplica detallada con más de 3000 piezas y mecanismo funcional.">
-                    <img src="img/lego_lamborghini.jpg" alt="imagen-lego" class="imagen_lego">
-                    <h3>Lego Lamborghini</h3>
-                    <p>1.000 bs.-</p>
-                    <div class="caja_botones">
-                        <button class="btn_save">Guardar</button>
-                        <button class="btn_mensaje">Mensaje</button>
-                        <button class="btn_view">Ver</button>
-                    </div>
-                </article>
-                <article class="section_anuncio_articulo_2" data-descripcion="Preservativos Tulipán con aroma a fresa, texturizados, resistentes y con lubricación extra.">
-                    <img src="img/tulipan_fresa.png" alt="imagen-tulipan" class="imagen_condones">
-                    <h3>Tulipan Preservativos - Fresa</h3>
-                    <p>20 bs.-</p>
-                    <div class="caja_botones">
-                        <button class="btn_save">Guardar</button>
-                        <button class="btn_mensaje">Mensaje</button>
-                        <button class="btn_view">Ver</button>
-                    </div>
-                </article>
-            </section>
 
             <div id="modal" class="modal" style="display: none;">
                 <div class="modal-content">
@@ -169,6 +61,7 @@
                     <p id="modal-precio"></p>
                     <button class="btn_mensaje">Mensaje</button>
                     <button class="btn_save">Guardar</button>
+                    <button class="btn_view">Ver</button>
                 </div>
             </div>
 
@@ -178,7 +71,9 @@
                     <p>Desarrollado por: <a href="">Richard Parra Zegarra</a></p>
                 </div>
             </footer>
+            <script src="./js/session.js"></script>
             <script src="js/vista_individual.js"></script>
+            <script src="js/lista_anuncio.js"></script>
         </main>
     </body>
 </html>

@@ -1,15 +1,15 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const { 
-    crearAnuncio, obtenerAnunciosPorUsuario, 
-    cambiarEstadoAnuncio, eliminarAnuncio 
-} = require('../controllers/anuncio.controller');
+const anuncioController = require("../controllers/anuncio.controller");
 
-router.post('/', crearAnuncio);
-router.get('/usuario/:id', obtenerAnunciosPorUsuario);
+// ✅ IMPORTANTE: primero la ruta específica
+router.get("/listado", anuncioController.obtenerAnunciosPublicos);
 
-router.put('/:id/estado', cambiarEstadoAnuncio);
-router.delete('/:id', eliminarAnuncio);
-
+router.post("/", anuncioController.crearAnuncio);
+router.get("/usuario/:id", anuncioController.obtenerAnunciosPorUsuario);
+router.get("/:id", anuncioController.obtenerAnuncioPorId); // esta va al final
+router.put("/:id", anuncioController.actualizarAnuncio);
+router.put("/:id/estado", anuncioController.cambiarEstadoAnuncio);
+router.delete("/:id", anuncioController.eliminarAnuncio);
 
 module.exports = router;

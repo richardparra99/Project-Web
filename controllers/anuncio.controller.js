@@ -106,10 +106,92 @@ const obtenerAnunciosDestacados = async (req, res) => {
   }
 };
 
+// Obtener solo anuncios activos para listado público
+const obtenerAnunciosPublicos = async (req, res) => {
+  try {
+    const result = await pool.query(`
+      SELECT a.*, u.nombre_completo, c.nombre AS categoria_nombre
+      FROM anuncio a
+      JOIN usuario u ON u.id = a.usuario_id
+      LEFT JOIN categoria c ON c.id = a.categoria_id
+      JOIN estado_anuncio ea ON ea.id = a.estado_id
+      WHERE ea.nombre = 'Activo'
+    `);
 
+    res.json(result.rows);
+  } catch (error) {
+    console.error("Error al obtener anuncios activos:", error);
+    res.status(500).json({ mensaje: "Error al obtener anuncios activos" });
+  }
+};
+
+
+const obtenerAnuncioPorId = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const result = await pool.query(
+      `SELECT a.*, u.nombre_completo, c.nombre AS categoria_nombre, ea.nombre AS estado_nombre
+       FROM anuncio a
+       JOIN usuario u ON u.id = a.usuario_id
+       LEFT JOIN categoria c ON c.id = a.categoria_id
+       LEFT JOIN estado_anuncio ea ON ea.id = a.estado_id
+       WHERE a.id = $1`,
+      [id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ mensaje: "Anuncio no encontrado" });
+    }
+
+    res.json(result.rows[0]);
+  } catch (error) {
+    console.error("Error al obtener anuncio por ID:", error);
+    res.status(500).json({ mensaje: "Error del servidor" });
+  }
+};
+
+
+
+const actualizarAnuncio = async (req, res) => {
+  const { id } = req.params;
+  const {
+    titulo,
+    descripcion,
+    precio,
+    imagenes,
+    categoria_id,
+    estado_id
+  } = req.body;
+
+  try {
+    const result = await pool.query(
+      `UPDATE anuncio SET
+        titulo = $1,
+        descripcion = $2,
+        precio = $3,
+        imagenes = $4,
+        categoria_id = $5,
+        estado_id = $6
+      WHERE id = $7
+      RETURNING *`,
+      [titulo, descripcion, precio, imagenes, categoria_id, estado_id, id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ mensaje: "Anuncio no encontrado para actualizar" });
+    }
+
+    res.json(result.rows[0]);
+  } catch (error) {
+    console.error("Error al actualizar anuncio:", error);
+    res.status(500).json({ mensaje: "Error del servidor" });
+  }
+};
 
 
 
 module.exports = { 
   crearAnuncio, obtenerAnunciosPorUsuario, 
-  cambiarEstadoAnuncio, eliminarAnuncio, obtenerAnunciosDestacados };
+  cambiarEstadoAnuncio, eliminarAnuncio, obtenerAnunciosDestacados, 
+  obtenerAnunciosPublicos, obtenerAnuncioPorId, actualizarAnuncio };

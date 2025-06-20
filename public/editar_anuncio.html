@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Editar Anuncio</title>
+    <link rel="stylesheet" href="css/estilos_1/section.css" />
+    <link rel="stylesheet" href="css/estilos_1/header.css" />
+    <link rel="stylesheet" href="css/estilos_1/footer.css" />
+    <link rel="stylesheet" href="css/estilos_1/form.css">
+  </head>
+  <body>
+    <main>
+      <header class="navbar">
+                <img class="logo_facebook" src="img/logo_facebook.png" alt="logo_facebook">
+                <h1 class="navbar__title">!editar anuncio!</h1>
+                <div class="navbar__buttons">
+                    <nav class="menu">
+                        <label class="menu-mobile-label" for="menu-switch">
+                            <i class="fa-solid fa-bars"></i>
+                            Menu
+                        </label>
+                        <input id="menu-switch" type="checkbox">
+                        <ul class="menu-links" id="menu-links">
+                            <li>
+                                <button  class="navbar__buttons__i"><a href="inicio_sesion.html">Iniciar sesion!</a></button>
+                            </li>
+                            <li>
+                                <button class="navbar__buttons__l"><a href="lista_anuncio.html">Lista anuncio</a></button>
+                            </li>
+                            <li>
+                                <button class="navbar__buttons__r"><a href="registrarse.html">Registrarse</a></button>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </header>
+            <hr>
+
+      <form id="formEditarAnuncio" enctype="multipart/form-data" style="display: flex; flex-direction: column; gap: 1rem; max-width: 600px; margin: auto;">
+        <input type="file" id="imagen" multiple />
+        <input class="btnTitulo" id="titulo" type="text" placeholder="Ingrese el título"/>
+        <input class="btnDescripcion" id="descripcion" type="text" placeholder="Ingrese la descripción" />
+        <input class="btnPrecio" id="precio" type="number" step="0.01" placeholder="Ingrese el precio" />
+        <input class="btnCategoria" id="categoria" type="text" placeholder="Ingrese la categoría (ID o nombre)" />
+        <input class="btnCrear" type="submit" value="Guardar Cambios" />
+        <a href="mis_anuncios.html"><button type="button" class="btnCancelar">Cancelar</button></a>
+      </form>
+    </main>
+
+    <script src="js/session.js"></script>
+    <script src="js/editar_anuncio.js"></script>
+  </body>
+</html>

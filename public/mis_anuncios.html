@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Pagina Principal</title>
+        <title>Mis Anuncios</title>
 
         <link rel="stylesheet" href="css/estilos_1/header.css">
         <link rel="stylesheet" href="css/estilos_1/section.css">
         <link rel="stylesheet" href="css/estilos_1/footer.css">
+        <link rel="stylesheet" href="css/estilos_1/section2.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     </head>
     <body>
@@ -38,58 +39,12 @@
             </header>
             <hr>
 
-            <section>
-                <div class="container">
-                    <h1 class="container__title">Bienvenido a Marketplace</h1>
-                    <p class="container__text">Tu lugar para comprar y vender productos de manera fácil y rápida.</p>
-                </div>
-            </section>
-
-            <h2>Anuncio destacados</h2>
 
             <section class="section_anuncio">
-                <h2>Anuncios habilitados</h2>
-                <article class="section_anuncio_articulo">
-                    <img src="../img/asus_g6143u.png" alt="imagen-laptop" id="imagen-laptop">
-                    <h3>Laptop Rog Asus</h3>
-                    <p>22.000 bs.-</p>
-                    <div class="caja_botones">
-                        <button class="btn_save">Guardar</button>
-                        <button class="btn_mensaje">Mensaje</button>
-                        <button class="btn_view">Ver</button>
-                    </div>
-                </article>
-                <article class="section_anuncio_articulo">
-                    <img src="../img/Apple_iPhone_16_Pro_Max.png" alt="imagen-apple" id="imagen-apple">
-                    <h3>Apple Iphone 16 Pro Max</h3>
-                    <p>18.000 bs.-</p>
-                    <div class="caja_botones">
-                        <button class="btn_save">Guardar</button>
-                        <button class="btn_mensaje">Mensaje</button>
-                        <button class="btn_view">Ver</button>
-                    </div>
-                </article>
+                <h2>Mis Anuncios</h2>
+                <div id="contenedor-mis-anuncios"></div>
             </section>
 
-            <h2>Categorias destacados</h2>
-
-            <section class="section_anuncio">
-                <h2>Anuncios habilitados</h2>
-                <article class="section_anuncio_articulo">
-                    <img src="../img/Computadores.png" alt="imagen-laptop" id="imagen-computadoras">
-                    <h3>Computadoras</h3>
-                    <div class="caja_botones">
-                        <button class="btn_view">Ver</button>
-                    </div>
-                </article>
-                <article class="section_anuncio_articulo">
-                    <img src="../img/lego.jpg" alt="imagen-apple" id="imagen-juguete">
-                    <h3>Categoria Jugueteria</h3>
-                    <div class="caja_botones">
-                        <button class="btn_view">Ver</button>
-                    </div>
-                </article>
-            </section>
 
             <footer>
                 <div class="footer">
@@ -103,5 +58,6 @@
             </footer>
         </main>
         <script src="./js/session.js"></script>
+        <script src="./js/mis_anuncio.js"></script>
     </body>
 </html>
