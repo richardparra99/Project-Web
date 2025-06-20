@@ -282,20 +282,39 @@ div .navbar__buttons__r a {
     }
 
     .navbar__buttons__i {
-        width: 100px;
+        width: 140px;
     }
 
     div .navbar__buttons__r {
         width: 100px;
     }
 
-    .navbar__buttons__i,.navbar__buttons__r, .navbar__buttons__l{
+    .navbar__buttons__i,.navbar__buttons__r, .navbar__buttons__l, .navbar__buttons__la, .navbar__buttons__ma{
         transition: background-color var(--tiempo-animacion) ease;
     }
 
     .navbar__buttons__i {
         background-color: var(--color-azul);
+        color: white;
         
+    }
+
+    .navbar__buttons__la {
+        background-color: var(--color-azul);
+        color: white;
+    }
+
+    .navbar__buttons__la:hover {
+        background-color: var(--color-azul-hover);
+    }
+
+    .navbar__buttons__ma {
+        background-color: var(--color-azul);
+        color: white;
+    }
+
+    .navbar__buttons__ma:hover {
+        background-color: var(--color-azul-hover);
     }
     
     .navbar__buttons__i:hover {

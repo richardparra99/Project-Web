@@ -323,23 +323,35 @@ button:hover {
     }
 
     input[type="search"] {
-    padding: 8px;
-    width: 200px;
-    border: 1px solid #196eb4;
-    border-radius: 4px 0 0 4px;
+        width: 200px;
+        border: 1px solid #196eb4;
+        border-radius: 4px 0 0 4px;
+        margin-top: 4px;
     }
 
     button {
-    padding: 8px 12px;
-    background-color: #196eb4;
-    color: white;
-    border: none;
-    border-radius: 0 4px 4px 0;
-    cursor: pointer;
+        background-color: #196eb4;
+        color: white;
+        border: none;
+        border-radius: 0 4px 4px 0;
+        cursor: pointer;
     }
 
     button:hover {
     background-color: #033157;
+    }
+
+    #btnBuscar {
+        margin-left: 1px;
+    }
+
+    .caja_botones {
+        gap: 30px;
+    }
+
+    .section_anuncio_articulo {
+        width: 120%;
+        height: 100%;
     }
 
 }
