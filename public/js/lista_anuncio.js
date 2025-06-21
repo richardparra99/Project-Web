@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       card.className = "section_anuncio_articulo";
 
       // Si hay imagen, úsala; si no, usa una por defecto
-      const imagen = anuncio.imagenes?.[0] || "img/default.png";
+      const imagen = anuncio.imagenes?.[0]?.path || "img/default.png";
 
       card.innerHTML = `
         <img src="${imagen}" alt="imagen-anuncio">

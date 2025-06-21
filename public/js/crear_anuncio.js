@@ -18,15 +18,14 @@ document.getElementById("formCrearAnuncio").addEventListener("submit", async fun
     return;
   }
 
-  // Obtener campos
   const titulo = document.getElementById("titulo").value.trim();
   const descripcion = document.getElementById("descripcion").value.trim();
   const precio = parseFloat(document.getElementById("precio").value);
   const categoriaNombre = document.getElementById("categoria").value.trim();
   const imagenInput = document.getElementById("imagen");
-  const imagenes = Array.from(imagenInput.files).map(file => file.name);
+  const archivos = Array.from(imagenInput.files);
 
-  // Validaciones
+  // Validaciones visuales
   if (!titulo) {
     document.getElementById("error-titulo").textContent = "Por favor ingrese el título.";
     document.getElementById("titulo").classList.add("error-input");
@@ -51,7 +50,7 @@ document.getElementById("formCrearAnuncio").addEventListener("submit", async fun
     hayError = true;
   }
 
-  if (imagenes.length === 0) {
+  if (archivos.length === 0) {
     document.getElementById("error-imagen").textContent = "Debe subir al menos una imagen.";
     document.getElementById("imagen").classList.add("error-input");
     hayError = true;
@@ -59,25 +58,29 @@ document.getElementById("formCrearAnuncio").addEventListener("submit", async fun
 
   if (hayError) return;
 
+  // Crear el FormData y agregar campos
+  const formData = new FormData();
+  formData.append("titulo", titulo);
+  formData.append("descripcion", descripcion);
+  formData.append("precio", precio);
+  formData.append("usuario_id", usuarioId);
+  formData.append("categoria_nombre", categoriaNombre);
+
+  Array.from(imagenInput.files).forEach(file => {
+    formData.append("imagenes", file);
+  });
+
   try {
     const response = await fetch("/anuncios", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        titulo,
-        descripcion,
-        precio,
-        imagenes,
-        usuario_id: parseInt(usuarioId),
-        categoria_nombre: categoriaNombre
-      })
+      body: formData,
     });
 
     const result = await response.json();
 
     if (response.ok) {
       alert("Anuncio creado correctamente.");
-      localStorage.setItem('nuevoAnuncioId', result.id);
+      localStorage.setItem("nuevoAnuncioId", result.id);
       window.location.href = "lista_anuncio.html";
     } else {
       alert(result.mensaje || "Error al crear el anuncio.");

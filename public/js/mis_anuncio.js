@@ -20,8 +20,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       const card = document.createElement("article");
       card.className = "section_anuncio_articulo";
 
+      const imagenSrc = anuncio.imagenes?.[0].path || "img/default.png";
+
       card.innerHTML = `
-        <img src="img/default.png" alt="imagen-anuncio">
+        <img src="${imagenSrc}" alt="imagen-anuncio">
         <h3>${anuncio.titulo}</h3>
         <p>${anuncio.precio} Bs.</p>
         <p>${anuncio.descripcion}</p>
@@ -31,6 +33,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           <button class="btn_eliminar">Eliminar</button>
         </div>
       `;
+
 
       // Editar
       card.querySelector(".btn_editar").addEventListener("click", () => {

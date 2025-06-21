@@ -1,10 +1,17 @@
 const pool = require('../conexion/db');
 
 const crearAnuncio = async (req, res) => {
-  const { titulo, descripcion, precio, imagenes, usuario_id, categoria_nombre } = req.body;
-
   try {
-    // 1. Buscar o crear la categoría
+    const { titulo, descripcion, precio, usuario_id, categoria_nombre } = req.body;
+
+    // 🔥 Capturar imágenes desde req.files
+    const imagenes = req.files?.map(file => ({
+      nombre: file.originalname,
+      path: `/uploads/${file.filename}`,
+      temporal: false
+    })) || [];
+
+    // Buscar o crear categoría
     let categoriaId;
     const catResult = await pool.query('SELECT id FROM categoria WHERE nombre = $1', [categoria_nombre]);
     if (catResult.rows.length > 0) {
@@ -17,20 +24,32 @@ const crearAnuncio = async (req, res) => {
       categoriaId = insertCat.rows[0].id;
     }
 
-    // 2. Asumimos que el estado inicial es "Publicado" (o crea uno por defecto si no existe)
+    // Buscar o crear estado "Publicado"
     const estadoResult = await pool.query('SELECT id FROM estado_anuncio WHERE nombre = $1', ['Publicado']);
     const estadoId = estadoResult.rows.length > 0
       ? estadoResult.rows[0].id
       : (await pool.query('INSERT INTO estado_anuncio (nombre) VALUES ($1) RETURNING id', ['Publicado'])).rows[0].id;
 
-    // 3. Crear anuncio
-    await pool.query(
-      `INSERT INTO anuncio (titulo, descripcion, precio, imagenes, usuario_id, categoria_id, estado_id)
-       VALUES ($1, $2, $3, $4, $5, $6, $7)`,
-      [titulo, descripcion, precio, imagenes, usuario_id, categoriaId, estadoId]
+    // Insertar anuncio (sin imagenes ahora)
+    const result = await pool.query(
+      `INSERT INTO anuncio (titulo, descripcion, precio, usuario_id, categoria_id, estado_id)
+       VALUES ($1, $2, $3, $4, $5, $6)
+       RETURNING id`,
+      [titulo, descripcion, precio, usuario_id, categoriaId, estadoId]
     );
 
-    res.status(201).json({ mensaje: "Anuncio creado correctamente." });
+    const anuncioId = result.rows[0].id;
+
+    // Insertar imágenes asociadas al anuncio
+    for (const img of imagenes) {
+      await pool.query(
+        `INSERT INTO imagen (nombre, path, temporal, fecha_subida, anuncio_id)
+         VALUES ($1, $2, $3, NOW(), $4)`,
+        [img.nombre, img.path, img.temporal, anuncioId]
+      );
+    }
+
+    res.status(201).json({ mensaje: "Anuncio creado con éxito", anuncioId });
   } catch (error) {
     console.error("Error al crear anuncio:", error);
     res.status(500).json({ mensaje: "Error del servidor al crear el anuncio." });
@@ -42,11 +61,14 @@ const obtenerAnunciosPorUsuario = async (req, res) => {
 
   try {
     const result = await pool.query(`
-  SELECT a.id, a.titulo, a.descripcion, a.precio, ea.nombre AS estado
-  FROM anuncio a
-  LEFT JOIN estado_anuncio ea ON a.estado_id = ea.id
-  WHERE a.usuario_id = $1
-`, [id]);
+      SELECT a.id, a.titulo, a.descripcion, a.precio, ea.nombre AS estado,
+        (
+          SELECT json_agg(i.*) FROM imagen i WHERE i.anuncio_id = a.id
+        ) AS imagenes
+      FROM anuncio a
+      LEFT JOIN estado_anuncio ea ON a.estado_id = ea.id
+      WHERE a.usuario_id = $1
+    `, [id]);
 
     res.status(200).json(result.rows);
   } catch (error) {
@@ -54,6 +76,7 @@ const obtenerAnunciosPorUsuario = async (req, res) => {
     res.status(500).json({ mensaje: "Error del servidor." });
   }
 };
+
 
 
 const cambiarEstadoAnuncio = async (req, res) => {
@@ -106,11 +129,21 @@ const obtenerAnunciosDestacados = async (req, res) => {
   }
 };
 
-// Obtener solo anuncios activos para listado público
 const obtenerAnunciosPublicos = async (req, res) => {
   try {
     const result = await pool.query(`
-      SELECT a.*, u.nombre_completo, c.nombre AS categoria_nombre
+      SELECT 
+        a.id,
+        a.titulo,
+        a.descripcion,
+        a.precio,
+        u.nombre_completo,
+        c.nombre AS categoria_nombre,
+        (
+          SELECT json_agg(json_build_object('path', i.path))
+          FROM imagen i
+          WHERE i.anuncio_id = a.id
+        ) AS imagenes
       FROM anuncio a
       JOIN usuario u ON u.id = a.usuario_id
       LEFT JOIN categoria c ON c.id = a.categoria_id
@@ -124,6 +157,7 @@ const obtenerAnunciosPublicos = async (req, res) => {
     res.status(500).json({ mensaje: "Error al obtener anuncios activos" });
   }
 };
+
 
 
 const obtenerAnuncioPorId = async (req, res) => {
