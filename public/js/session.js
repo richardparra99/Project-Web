@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <button class="navbar__buttons__i"><a href="index.html">Inicio</a></button>
       </li>
       <li>
-        <button class="navbar__buttons__i"><a href="lista_anuncio.html">Lista de Anuncios</a></button>
+        <button class="navbar__buttons__la"><a href="lista_anuncio.html">Lista de Anuncios</a></button>
       </li>
       <li>
         <button class="navbar__buttons__i"><a href="mis_anuncios.html">Mis Anuncios</a></button>
