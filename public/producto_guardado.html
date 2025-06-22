@@ -5,24 +5,54 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Marketplace - guardado</title>
 
-        <link rel="stylesheet" href="css/estilos_10/header.css">
+        <link rel="stylesheet" href="css/estilos_1/header.css">
+        <link rel="stylesheet" href="css/estilos_1/section.css">
         <link rel="stylesheet" href="css/estilos_10/section.css">
         <link rel="stylesheet" href="css/estilos_10/footer.css">
+        <link rel="stylesheet" href="css/estilos_11/modal.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     </head>
     <body>
         <main>
             <header class="navbar">
                 <img class="logo_facebook" src="img/logo_facebook.png" alt="logo_facebook">
-                <h1 class="navbar__title">!Marketplace Producto guardado!</h1>
+                <h1 class="navbar__title">!guardado de anuncio!</h1>
+                <div class="navbar__buttons">
+                    <nav class="menu">
+                        <label class="menu-mobile-label" for="menu-switch">
+                            <i class="fa-solid fa-bars"></i>
+                            Menu
+                        </label>
+                        <input id="menu-switch" type="checkbox">
+                        <ul class="menu-links" id="menu-links">
+                            <li>
+                                <button  class="navbar__buttons__i"><a href="inicio_sesion.html">Iniciar sesion!</a></button>
+                            </li>
+                            <li>
+                                <button class="navbar__buttons__l"><a href="lista_anuncio.html">Lista anuncio</a></button>
+                            </li>
+                            <li>
+                                <button class="navbar__buttons__r"><a href="registrarse.html">Registrarse</a></button>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
             </header>
             <hr>
 
-            <div class="caja-contenedor">
-                <img src="" alt="">
-                <h2>producto 1</h2>
-                <p>precio</p>
-                <button id="btn-mensaje">Mensaje</button>
-                <button id="btn-eliminar">Eliminar</button>
+            <section id="contenedor-anuncios-guardados" class="guardado-section">
+                <h2>Anuncios Guardados</h2>
+            </section>
+
+            <div class="modal" id="modal" style="display: none;">
+                <div class="modal-content">
+                    <span class="close" onclick="cerrarModal()">&times;</span>
+                    <img id="modal-img" src="img/default.png" alt="imagen-anuncio" />
+                    <h3 id="modal-nombre"></h3>
+                    <p id="modal-descripcion"></p>
+                    <p id="modal-precio"></p>
+                    <p id="modal-creador"></p>
+                </div>
             </div>
 
             <footer>
@@ -31,5 +61,7 @@
                 </div>
             </footer>
         </main>
+        <script src="js/session.js"></script>
+        <script src="js/producto_guardado.js"></script>
     </body>
 </html>

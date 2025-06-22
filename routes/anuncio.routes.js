@@ -36,4 +36,5 @@ router.put("/:id", anuncioController.actualizarAnuncio);
 router.put("/:id/estado", anuncioController.cambiarEstadoAnuncio);
 router.delete("/:id", anuncioController.eliminarAnuncio);
 
+
 module.exports = router;

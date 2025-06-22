@@ -1,3 +1,7 @@
 .section_anuncio_articulo {
     width: 50%;
 }
+
+p {
+    font-family: Arial, Helvetica, sans-serif;
+}

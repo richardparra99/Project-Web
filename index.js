@@ -8,6 +8,7 @@ const path = require("path");
 const usuarioRoutes = require('./routes/usuario.routes');
 const anuncioRoutes = require('./routes/anuncio.routes');
 const imagenRoutes = require('./routes/imagen.routes');
+const guardadoRoutes = require('./routes/guardado.routes');
 
 app.use(express.json());
 
@@ -18,6 +19,7 @@ app.use(express.static('public'));
 app.use('/usuarios', usuarioRoutes);
 app.use('/anuncios', anuncioRoutes);
 app.use('/imagenes', imagenRoutes);
+app.use('/guardados', guardadoRoutes);
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 

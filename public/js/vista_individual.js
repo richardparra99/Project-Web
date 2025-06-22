@@ -1,25 +1,21 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const botones = document.querySelectorAll('.btn_view');
+function abrirModal(anuncio) {
+  const modal = document.getElementById('modal');
+  const img = document.getElementById('modal-img');
+  const nombre = document.getElementById('modal-nombre');
+  const descripcion = document.getElementById('modal-descripcion');
+  const precio = document.getElementById('modal-precio');
+  const publicado = document.getElementById('modal-publicado');
 
-  botones.forEach(boton => {
-    boton.addEventListener('click', (e) => {
-      e.preventDefault();
+  // Cargar los datos del anuncio
+  img.src = anuncio.imagenes?.[0]?.path || 'img/default.png';
+  nombre.textContent = anuncio.titulo;
+  descripcion.textContent = anuncio.descripcion;
+  precio.textContent = `${anuncio.precio} Bs.`;
+  publicado.textContent = `Publicado por: ${anuncio.nombre_completo || 'Desconocido'}`;
 
-      const article = boton.closest('article');
-      const img = article.querySelector('img').src;
-      const nombre = article.querySelector('h3').textContent;
-      const precio = article.querySelector('p').textContent;
-      const descripcion = article.getAttribute('data-descripcion');
-
-      document.getElementById('modal-img').src = img;
-      document.getElementById('modal-nombre').textContent = nombre;
-      document.getElementById('modal-precio').textContent = precio;
-      document.getElementById('modal-descripcion').textContent = descripcion;
-
-      document.getElementById('modal').style.display = 'flex';
-    });
-  });
-});
+  // Mostrar el modal
+  modal.style.display = 'flex';
+}
 
 function cerrarModal() {
   document.getElementById('modal').style.display = 'none';

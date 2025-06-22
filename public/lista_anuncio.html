@@ -52,18 +52,17 @@
             </section>
 
 
-            <div id="modal" class="modal" style="display: none;">
+            <div class="modal" id="modal" style="display: none;">
                 <div class="modal-content">
                     <span class="close" onclick="cerrarModal()">&times;</span>
-                    <img id="modal-img" src="" alt="Producto" style="max-width: 100%;">
-                    <h2 id="modal-nombre"></h2>
+                    <img id="modal-img" src="img/default.png" alt="imagen-anuncio" />
+                    <h3 id="modal-nombre"></h3>
                     <p id="modal-descripcion"></p>
                     <p id="modal-precio"></p>
-                    <button class="btn_mensaje">Mensaje</button>
-                    <button class="btn_save">Guardar</button>
-                    <button class="btn_view">Ver</button>
+                    <p id="modal-publicado"></p>
                 </div>
             </div>
+
 
 
             <footer>
@@ -71,7 +70,7 @@
                     <p>Desarrollado por: <a href="">Richard Parra Zegarra</a></p>
                 </div>
             </footer>
-            <script src="./js/session.js"></script>
+            <script src="js/session.js"></script>
             <script src="js/vista_individual.js"></script>
             <script src="js/lista_anuncio.js"></script>
         </main>
