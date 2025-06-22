@@ -25,6 +25,9 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
       </li>
       <li>
+        <button class="navbar__buttons__r"><a href="producto_guardado.html">Guardados</a></button>
+      </li>
+      <li>
         <button class="navbar__buttons__r" id="btnCerrarSesion"><a href="#">Cerrar Sesión</a></button>
       </li>
     `;

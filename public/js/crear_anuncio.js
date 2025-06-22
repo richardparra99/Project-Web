@@ -80,7 +80,7 @@ document.getElementById("formCrearAnuncio").addEventListener("submit", async fun
 
     if (response.ok) {
       alert("Anuncio creado correctamente.");
-      localStorage.setItem("nuevoAnuncioId", result.id);
+      //localStorage.setItem("nuevoAnuncioId", result.id);
       window.location.href = "lista_anuncio.html";
     } else {
       alert(result.mensaje || "Error al crear el anuncio.");

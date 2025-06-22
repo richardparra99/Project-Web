@@ -1,31 +1,97 @@
-.caja-contenedor {
-    background-color: #dcdcdc;
-    width: 50%;
-    height: auto;
-    display: flex;
-    justify-content: space-around;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 10px;
-    font-family: Arial, Helvetica, sans-serif;
+:root {
+  --color-azul: #196eb4;
+  --color-azul-hover: #033157;
+  --color-blanco: #ffffff;
+  --color-oscuro: #363636;
+  --color-oscuro-hover: #070707;
+  --verde-opaco: #BAD89A;
+  --verde-hover: #62773E;
+  --tiempo-animacion: 300ms;
 }
 
-div button{
-    width: 80px;
-    height: 30px;
-    margin-top: 20px;
-    font-family: Arial, Helvetica, sans-serif;
+/* 🌐 Mobile primero */
+.section_anuncio_articulo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid var(--color-azul);
+  border-radius: 8px;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin-bottom: 1rem;
+  transition: transform var(--tiempo-animacion);
+  text-align: center;
 }
 
-div #btn-mensaje {
-    background-color: white;
-    border: 0px;
-    border-radius: 2px;
+.section_anuncio_articulo:hover {
+  transform: scale(1.01);
 }
 
-div #btn-eliminar {
-    background-color:brown;
-    border: 0px;
-    color: white;
-    border-radius: 2px;
+.section_anuncio_articulo img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.section_anuncio_articulo h3 {
+  font-size: 1.2rem;
+  color: var(--color-oscuro);
+  margin: 5px 0;
+}
+
+.section_anuncio_articulo p {
+  font-size: 1rem;
+  color: #555;
+  margin: 3px 0;
+}
+
+.btn_eliminar_guardado {
+  margin-top: 10px;
+  background-color: #e74c3c;
+  color: var(--color-blanco);
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color var(--tiempo-animacion);
+}
+
+.btn_ver_guardado {
+  margin-top: 10px;
+  background-color: var(--color-azul);
+  color: var(--color-blanco);
+  border: none;
+  padding: 10px 30px 10px 30px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color var(--tiempo-animacion);
+}
+
+.btn_eliminar_guardado:hover {
+  background-color: #c0392b;
+}
+
+.btn_ver_guardado:hover {
+  background-color: var(--color-azul-hover);
+}
+
+/* 📱 Tablet */
+@media (min-width: 600px) {
+  .section_anuncio_articulo {
+    flex: 0 0 45%;
+    margin: 10px;
+  }
+}
+
+/* 💻 PC */
+@media (min-width: 992px) {
+  .section_anuncio_articulo {
+    flex: 0 0 30%;
+  }
 }

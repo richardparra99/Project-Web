@@ -185,41 +185,46 @@ const obtenerAnuncioPorId = async (req, res) => {
   }
 };
 
-
-
 const actualizarAnuncio = async (req, res) => {
   const { id } = req.params;
   const {
     titulo,
     descripcion,
     precio,
-    imagenes,
     categoria_id,
     estado_id
   } = req.body;
 
   try {
+    // Actualizar datos del anuncio (sin imágenes)
     const result = await pool.query(
       `UPDATE anuncio SET
         titulo = $1,
         descripcion = $2,
         precio = $3,
-        imagenes = $4,
-        categoria_id = $5,
-        estado_id = $6
-      WHERE id = $7
+        categoria_id = $4,
+        estado_id = $5
+      WHERE id = $6
       RETURNING *`,
-      [titulo, descripcion, precio, imagenes, categoria_id, estado_id, id]
+      [titulo, descripcion, precio, categoria_id, estado_id, id]
     );
 
-    if (result.rows.length === 0) {
-      return res.status(404).json({ mensaje: "Anuncio no encontrado para actualizar" });
+    // 👇 Si hay imágenes nuevas, insertarlas en la tabla imagen
+    if (req.files && req.files.length > 0) {
+      const insertPromises = req.files.map(file =>
+        pool.query(
+          `INSERT INTO imagen (nombre, path, temporal, fecha_subida, anuncio_id)
+           VALUES ($1, $2, false, CURRENT_TIMESTAMP, $3)`,
+          [file.originalname, `/uploads/${file.filename}`, id]
+        )
+      );
+      await Promise.all(insertPromises);
     }
 
-    res.json(result.rows[0]);
+    res.json({ mensaje: 'Anuncio actualizado correctamente' });
   } catch (error) {
     console.error("Error al actualizar anuncio:", error);
-    res.status(500).json({ mensaje: "Error del servidor" });
+    res.status(500).json({ mensaje: "Error del servidor al actualizar el anuncio" });
   }
 };
 
