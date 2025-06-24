@@ -4,7 +4,6 @@ const anuncioController = require("../controllers/anuncio.controller");
 const multer = require("multer");
 const path = require("path");
 
-// Configuración de multer
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, "uploads/"),
   filename: (req, file, cb) => {
@@ -25,16 +24,17 @@ const upload = multer({
   },
 });
 
-// Rutas
-router.post("/", upload.array("imagenes"), anuncioController.crearAnuncio); // << IMPORTANTE
+router.post("/", upload.array("imagenes"), anuncioController.crearAnuncio);
 
-// otras rutas:
 router.get("/listado", anuncioController.obtenerAnunciosPublicos);
 router.get("/usuario/:id", anuncioController.obtenerAnunciosPorUsuario);
 router.get("/:id", anuncioController.obtenerAnuncioPorId);
 router.put("/:id", anuncioController.actualizarAnuncio);
 router.put("/:id/estado", anuncioController.cambiarEstadoAnuncio);
 router.delete("/:id", anuncioController.eliminarAnuncio);
+
+router.get("/listado", anuncioController.listarAnunciosPublicos);
+
 
 
 module.exports = router;

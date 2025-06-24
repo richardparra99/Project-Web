@@ -4,14 +4,12 @@ const crearAnuncio = async (req, res) => {
   try {
     const { titulo, descripcion, precio, usuario_id, categoria_nombre } = req.body;
 
-    // 🔥 Capturar imágenes desde req.files
     const imagenes = req.files?.map(file => ({
       nombre: file.originalname,
       path: `/uploads/${file.filename}`,
       temporal: false
     })) || [];
 
-    // Buscar o crear categoría
     let categoriaId;
     const catResult = await pool.query('SELECT id FROM categoria WHERE nombre = $1', [categoria_nombre]);
     if (catResult.rows.length > 0) {
@@ -24,13 +22,11 @@ const crearAnuncio = async (req, res) => {
       categoriaId = insertCat.rows[0].id;
     }
 
-    // Buscar o crear estado "Publicado"
-    const estadoResult = await pool.query('SELECT id FROM estado_anuncio WHERE nombre = $1', ['Publicado']);
+    const estadoResult = await pool.query('SELECT id FROM estado_anuncio WHERE nombre = $1', ['Activo']);
     const estadoId = estadoResult.rows.length > 0
       ? estadoResult.rows[0].id
-      : (await pool.query('INSERT INTO estado_anuncio (nombre) VALUES ($1) RETURNING id', ['Publicado'])).rows[0].id;
+      : (await pool.query('INSERT INTO estado_anuncio (nombre) VALUES ($1) RETURNING id', ['Activo'])).rows[0].id;
 
-    // Insertar anuncio (sin imagenes ahora)
     const result = await pool.query(
       `INSERT INTO anuncio (titulo, descripcion, precio, usuario_id, categoria_id, estado_id)
        VALUES ($1, $2, $3, $4, $5, $6)
@@ -40,7 +36,6 @@ const crearAnuncio = async (req, res) => {
 
     const anuncioId = result.rows[0].id;
 
-    // Insertar imágenes asociadas al anuncio
     for (const img of imagenes) {
       await pool.query(
         `INSERT INTO imagen (nombre, path, temporal, fecha_subida, anuncio_id)
@@ -83,11 +78,9 @@ const cambiarEstadoAnuncio = async (req, res) => {
   const { id } = req.params;
 
   try {
-    // Obtener estado actual
     const actual = await pool.query('SELECT estado_id FROM anuncio WHERE id = $1', [id]);
     const estadoActual = actual.rows[0]?.estado_id;
 
-    // Buscar el nuevo estado_id (1: Publicado, 2: Inactivo)
     const nuevoEstadoId = estadoActual === 1 ? 2 : 1;
 
     await pool.query('UPDATE anuncio SET estado_id = $1 WHERE id = $2', [nuevoEstadoId, id]);
@@ -105,13 +98,19 @@ const eliminarAnuncio = async (req, res) => {
   const { id } = req.params;
 
   try {
+    // Eliminar el anuncio
     await pool.query('DELETE FROM anuncio WHERE id = $1', [id]);
-    res.status(200).json({ mensaje: 'Anuncio eliminado' });
+
+    // Reiniciar la secuencia usando interpolación directa (porque no acepta $1)
+    await pool.query(`ALTER SEQUENCE anuncio_id_seq RESTART WITH ${id}`);
+
+    res.status(200).json({ mensaje: `Anuncio ${id} eliminado y secuencia reiniciada desde ${id}` });
   } catch (error) {
-    console.error(error);
+    console.error("Error al eliminar anuncio:", error);
     res.status(500).json({ mensaje: 'Error al eliminar anuncio' });
   }
 };
+
 
 
 const obtenerAnunciosDestacados = async (req, res) => {
@@ -120,7 +119,7 @@ const obtenerAnunciosDestacados = async (req, res) => {
       SELECT a.id, a.titulo, a.descripcion, a.precio
       FROM anuncio a
       INNER JOIN estado_anuncio ea ON a.estado_id = ea.id
-      WHERE ea.nombre = 'Publicado'
+      WHERE ea.nombre = 'Activo'
     `);
     res.status(200).json(result.rows);
   } catch (err) {
@@ -132,18 +131,20 @@ const obtenerAnunciosDestacados = async (req, res) => {
 const obtenerAnunciosPublicos = async (req, res) => {
   try {
     const result = await pool.query(`
-      SELECT 
-        a.id,
-        a.titulo,
-        a.descripcion,
-        a.precio,
-        u.nombre_completo,
-        c.nombre AS categoria_nombre,
-        (
-          SELECT json_agg(json_build_object('path', i.path))
-          FROM imagen i
-          WHERE i.anuncio_id = a.id
-        ) AS imagenes
+SELECT 
+  a.id,
+  a.titulo,
+  a.descripcion,
+  a.precio,
+  a.usuario_id,
+  u.nombre_completo,
+  c.nombre AS categoria_nombre,
+  (
+    SELECT json_agg(json_build_object('path', i.path))
+    FROM imagen i
+    WHERE i.anuncio_id = a.id
+  ) AS imagenes
+
       FROM anuncio a
       JOIN usuario u ON u.id = a.usuario_id
       LEFT JOIN categoria c ON c.id = a.categoria_id
@@ -196,7 +197,6 @@ const actualizarAnuncio = async (req, res) => {
   } = req.body;
 
   try {
-    // Actualizar datos del anuncio (sin imágenes)
     const result = await pool.query(
       `UPDATE anuncio SET
         titulo = $1,
@@ -209,7 +209,6 @@ const actualizarAnuncio = async (req, res) => {
       [titulo, descripcion, precio, categoria_id, estado_id, id]
     );
 
-    // 👇 Si hay imágenes nuevas, insertarlas en la tabla imagen
     if (req.files && req.files.length > 0) {
       const insertPromises = req.files.map(file =>
         pool.query(
@@ -228,9 +227,33 @@ const actualizarAnuncio = async (req, res) => {
   }
 };
 
+const listarAnunciosPublicos = async (req, res) => {
+  try {
+    const resultado = await pool.query(`
+      SELECT a.id, a.titulo, a.descripcion, a.precio, a.usuario_id,
+             u.nombre_completo,
+             c.nombre AS categoria_nombre,
+             (
+               SELECT json_agg(i.*) FROM imagen i WHERE i.anuncio_id = a.id
+             ) AS imagenes
+      FROM anuncio a
+      JOIN usuario u ON a.usuario_id = u.id
+      LEFT JOIN categoria c ON c.id = a.categoria_id
+      JOIN estado_anuncio ea ON ea.id = a.estado_id
+      WHERE ea.nombre = 'Activo'
+    `);
+    res.json(resultado.rows);
+  } catch (error) {
+    console.error("Error al listar anuncios públicos:", error);
+    res.status(500).json({ mensaje: "Error al obtener anuncios públicos" });
+  }
+};
+
+
 
 
 module.exports = { 
   crearAnuncio, obtenerAnunciosPorUsuario, 
   cambiarEstadoAnuncio, eliminarAnuncio, obtenerAnunciosDestacados, 
-  obtenerAnunciosPublicos, obtenerAnuncioPorId, actualizarAnuncio };
+  obtenerAnunciosPublicos, obtenerAnuncioPorId, actualizarAnuncio,
+  listarAnunciosPublicos };

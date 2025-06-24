@@ -79,20 +79,22 @@ const obtenerAnunciosGuardadosPorUsuario = async (req, res) => {
 
   try {
     const result = await pool.query(`
-    SELECT a.id, a.titulo, a.descripcion, a.precio, i.path AS imagen, u.nombre_completo
-    FROM anuncio_guardado ag
-    JOIN anuncio a ON ag.anuncio_id = a.id
-    LEFT JOIN imagen i ON i.anuncio_id = a.id
-    JOIN usuario u ON a.usuario_id = u.id
-    WHERE ag.usuario_id = $1
-    GROUP BY a.id, i.path, u.nombre_completo
-  `, [id]);
+      SELECT a.id, a.titulo, a.descripcion, a.precio, i.path AS imagen, u.nombre_completo
+      FROM anuncio_guardado ag
+      JOIN anuncio a ON ag.anuncio_id = a.id
+      LEFT JOIN imagen i ON i.anuncio_id = a.id
+      JOIN usuario u ON a.usuario_id = u.id
+      WHERE ag.usuario_id = $1
+      GROUP BY a.id, i.path, u.nombre_completo
+    `, [id]);
+
     res.json(result.rows);
   } catch (error) {
     console.error("Error al obtener anuncios guardados:", error);
     res.status(500).json({ mensaje: "Error al obtener anuncios guardados" });
   }
 };
+
 
 
 

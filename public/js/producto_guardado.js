@@ -47,7 +47,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         document.getElementById("modal-nombre").textContent = anuncio.titulo;
         document.getElementById("modal-descripcion").textContent = anuncio.descripcion;
         document.getElementById("modal-precio").textContent = `${anuncio.precio} Bs.`;
-        document.getElementById("modal-creador").textContent = `Publicado por: ${anuncio.nombre_completo}`;
+        document.getElementById("modal-creador").textContent = `Publicado por: ${anuncio.nombre_completo || 'Desconocido'}`;
+
         document.getElementById("modal").style.display = "flex";
       });
 

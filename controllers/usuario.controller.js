@@ -1,4 +1,3 @@
-// controllers/usuario.controller.js
 const pool = require('../conexion/db');
 
 const getUsuarios = async (req, res) => {
@@ -45,6 +44,9 @@ const loginUsuario = async (req, res) => {
         res.status(500).json({ mensaje: 'Error del servidor al iniciar sesión' });
     }
 };
+
+
+
 
 
 module.exports = {
