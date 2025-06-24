@@ -27,6 +27,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     anuncios.forEach(anuncio => {
       const card = document.createElement("article");
       card.className = "section_anuncio_articulo";
+      
+      console.log("Anuncio debug:", anuncio);
 
       // Si hay imagen, úsala; si no, usa una por defecto
       const imagen = anuncio.imagenes?.[0]?.path || "img/default.png";
@@ -71,6 +73,54 @@ document.addEventListener("DOMContentLoaded", async () => {
           alert("No se pudo guardar el anuncio.");
         }
       });
+
+      const btnMensaje = card.querySelector(".btn_mensaje");
+
+      btnMensaje.addEventListener("click", async () => {
+        const usuarioId = localStorage.getItem("usuarioId");
+
+        if (!usuarioId) {
+          alert("Debes iniciar sesión para enviar mensajes.");
+          return;
+        }
+
+        if (parseInt(usuarioId) === anuncio.usuario_id) {
+          alert("No puedes enviarte mensajes a ti mismo.");
+          return;
+        }
+
+        try {
+          const res = await fetch("/conversaciones", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              anuncio_id: anuncio.id,
+              interesado_id: usuarioId,
+              anunciante_id: anuncio.usuario_id
+            }),
+          });
+
+          if (!res.ok) {
+            const err = await res.text();
+            throw new Error("Respuesta no OK del servidor: " + err);
+          }
+
+          const data = await res.json();
+          console.log("✅ Conversación creada o reutilizada:", data);
+
+          if (!data || !data.id) {
+            throw new Error("No se pudo crear conversación (sin ID)");
+          }
+
+          // Redirigir al chat con anuncio
+          window.location.href = `chat_anuncio.html?conversacionId=${data.id}&anuncioId=${anuncio.id}`;
+        } catch (error) {
+          console.error("❌ Error al iniciar conversación:", error);
+          alert("Error al iniciar conversación.");
+        }
+      });
+
+
 
 
       contenedor.appendChild(card);
