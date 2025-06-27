@@ -10,4 +10,8 @@ router.get("/anuncio/:anuncioId", conversacionController.obtenerConversacionesPo
 
 router.get('/:id', conversacionController.obtenerConversacionPorId); 
 
+router.get('/interesado/:usuarioId', conversacionController.obtenerConversacionesDeCompras);
+
+
+
 module.exports = router;

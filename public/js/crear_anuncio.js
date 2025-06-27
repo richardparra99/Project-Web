@@ -2,7 +2,7 @@ function limpiarErrores() {
   const errores = document.querySelectorAll(".error");
   errores.forEach(e => e.textContent = "");
 
-  const inputs = document.querySelectorAll("input");
+  const inputs = document.querySelectorAll("input, select, textarea");
   inputs.forEach(input => input.classList.remove("error-input"));
 }
 
@@ -23,7 +23,7 @@ document.getElementById("formCrearAnuncio").addEventListener("submit", async fun
   const precio = parseFloat(document.getElementById("precio").value);
   const categoriaNombre = document.getElementById("categoria").value.trim();
   const imagenInput = document.getElementById("imagen");
-  const archivos = Array.from(imagenInput.files);
+  //const archivos = Array.from(imagenInput.files);
 
   // Validaciones visuales
   if (!titulo) {
@@ -50,7 +50,7 @@ document.getElementById("formCrearAnuncio").addEventListener("submit", async fun
     hayError = true;
   }
 
-  if (archivos.length === 0) {
+  if (imagenesSeleccionadas.length === 0) {
     document.getElementById("error-imagen").textContent = "Debe subir al menos una imagen.";
     document.getElementById("imagen").classList.add("error-input");
     hayError = true;
@@ -66,7 +66,7 @@ document.getElementById("formCrearAnuncio").addEventListener("submit", async fun
   formData.append("usuario_id", usuarioId);
   formData.append("categoria_nombre", categoriaNombre);
 
-  Array.from(imagenInput.files).forEach(file => {
+  imagenesSeleccionadas.forEach(file => {
     formData.append("imagenes", file);
   });
 
@@ -80,7 +80,6 @@ document.getElementById("formCrearAnuncio").addEventListener("submit", async fun
 
     if (response.ok) {
       alert("Anuncio creado correctamente.");
-      //localStorage.setItem("nuevoAnuncioId", result.id);
       window.location.href = "lista_anuncio.html";
     } else {
       alert(result.mensaje || "Error al crear el anuncio.");
@@ -89,4 +88,59 @@ document.getElementById("formCrearAnuncio").addEventListener("submit", async fun
     console.error(error);
     alert("Error en el servidor.");
   }
+});
+
+let imagenesSeleccionadas = [];
+
+document.getElementById("imagen").addEventListener("change", function () {
+  const preview = document.getElementById("preview-imagenes");
+
+  Array.from(this.files).forEach(file => {
+    imagenesSeleccionadas.push(file);
+
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const container = document.createElement("div");
+      container.style.display = "inline-block";
+      container.style.marginRight = "8px";
+      container.style.position = "relative";
+
+      const img = document.createElement("img");
+      img.src = e.target.result;
+      img.style.width = "80px";
+      img.style.height = "80px";
+      img.style.objectFit = "cover";
+      img.style.borderRadius = "4px";
+
+      const btnEliminar = document.createElement("button");
+      btnEliminar.textContent = "X";
+      btnEliminar.style.position = "absolute";
+      btnEliminar.style.top = "0";
+      btnEliminar.style.right = "0";
+      btnEliminar.style.background = "red";
+      btnEliminar.style.color = "white";
+      btnEliminar.style.border = "none";
+      btnEliminar.style.borderRadius = "50%";
+      btnEliminar.style.width = "20px";
+      btnEliminar.style.height = "20px";
+      btnEliminar.style.cursor = "pointer";
+      btnEliminar.style.fontSize = "12px";
+      btnEliminar.style.lineHeight = "20px";
+
+      btnEliminar.addEventListener("click", () => {
+        // Elimina visualmente
+        preview.removeChild(container);
+
+        // Elimina del array
+        imagenesSeleccionadas = imagenesSeleccionadas.filter(f => f !== file);
+      });
+
+      container.appendChild(img);
+      container.appendChild(btnEliminar);
+      preview.appendChild(container);
+    };
+    reader.readAsDataURL(file);
+  });
+
+  this.value = "";
 });
