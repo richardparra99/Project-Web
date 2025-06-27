@@ -31,9 +31,10 @@ main {
     background-color: #28a745;
     color: #fff;
     border: none;
-    padding: 0.4rem 0.8rem;
+    padding: 10px 10px 10px 10px;
     border-radius: 5px;
     cursor: pointer;
+    margin-left: 2px;
 }
 
 .anuncio-card button:hover {

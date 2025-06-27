@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       <div style="border: 1px solid #ccc; padding: 1rem; border-radius: 6px; margin-bottom: 1rem;">
         <strong>${conv.interesado_nombre || 'Interesado desconocido'}</strong>
         <p style="color: #444;">${conv.ultimo_mensaje || '(Sin mensajes aún)'}</p>
-        <button style="margin-top: 0.5rem;" onclick="window.location.href='chat_anuncio.html?conversacionId=${conv.id}&anuncioId=${anuncioId}'">
+        <button class="btnAbrirChat" onclick="window.location.href='chat_anuncio.html?conversacionId=${conv.id}&anuncioId=${anuncioId}'">
           Abrir chat
         </button>
       </div>

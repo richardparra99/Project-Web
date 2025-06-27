@@ -103,8 +103,49 @@ const obtenerConversacionPorId = async (req, res) => {
 };
 
 
+const obtenerConversacionesDeCompras = async (req, res) => {
+  const { usuarioId } = req.params;
+
+  try {
+    const result = await pool.query(`
+      SELECT c.id, 
+             a.id AS anuncio_id, 
+             a.titulo, 
+             a.descripcion, 
+             a.precio, 
+             u.nombre_completo, 
+             (SELECT path FROM imagen WHERE anuncio_id = a.id LIMIT 1) AS imagen,
+             (SELECT contenido FROM mensaje WHERE conversacion_id = c.id ORDER BY fecha_envio DESC LIMIT 1) AS ultimo_mensaje
+      FROM conversacion c
+      JOIN anuncio a ON a.id = c.anuncio_id
+      JOIN usuario u ON a.usuario_id = u.id
+      WHERE c.interesado_id = $1
+      ORDER BY c.id DESC
+    `, [usuarioId]);
+
+    const conversaciones = result.rows.map(conv => ({
+      id: conv.id,
+      anuncio: {
+        id: conv.anuncio_id,
+        titulo: conv.titulo,
+        descripcion: conv.descripcion,
+        precio: conv.precio,
+        nombre_completo: conv.nombre_completo,
+        imagenes: conv.imagen ? [{ path: conv.imagen }] : []
+      },
+      ultimo_mensaje: conv.ultimo_mensaje
+    }));
+
+    res.json(conversaciones);
+  } catch (error) {
+    console.error("Error en obtenerConversacionesDeCompras:", error);
+    res.status(500).send("Error al obtener compras.");
+  }
+};
+
+
 
 module.exports = {
   iniciarConversacion, obtenerConversaciones ,
-  obtenerConversacionesPorAnuncio, obtenerConversacionPorId
+  obtenerConversacionesPorAnuncio, obtenerConversacionPorId, obtenerConversacionesDeCompras
 };
