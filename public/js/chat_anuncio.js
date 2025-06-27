@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", async () => {
+  let receptorId = null;
   const params = new URLSearchParams(window.location.search);
   const conversacionId = params.get("conversacionId");
   const anuncioId = params.get("anuncioId");
@@ -9,28 +10,54 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
-  // Cargar info del anuncio
   try {
+    // 🔹 Cargar detalle del anuncio
     const resAnuncio = await fetch(`/anuncios/${anuncioId}`);
     const anuncio = await resAnuncio.json();
 
     const anuncioDiv = document.getElementById("anuncio-info");
     anuncioDiv.innerHTML = `
+      <img src="${anuncio.imagenes?.[0]?.path || 'img/default.png'}"
+           alt="Imagen anuncio"
+           style="width: 100%; max-width: 300px; border-radius: 8px; box-shadow: 0 0 8px rgba(0,0,0,0.2); margin-bottom: 1rem;">
       <h2>${anuncio.titulo}</h2>
       <p>${anuncio.descripcion}</p>
       <p><strong>Precio:</strong> Bs. ${anuncio.precio}</p>
       <p><strong>Publicado por:</strong> ${anuncio.nombre_completo}</p>
-      <div>
-        ${(anuncio.imagenes || []).map(img =>
-          `<img src="${img.path}" alt="imagen" style="max-width: 100px; margin: 5px;">`
-        ).join("")}
-      </div>
     `;
+
+    // 🔹 Obtener datos de la conversación (interesado y anunciante)
+    const resConv = await fetch(`/conversaciones/${conversacionId}`);
+    const conversacion = await resConv.json();
+
+    // 🔹 Determinar quién es el receptor (la otra persona)
+    let nombreReceptor = "Usuario";
+    if (parseInt(usuarioId) === conversacion.anunciante_id) {
+      receptorId = conversacion.interesado_id;
+      nombreReceptor = conversacion.interesado_nombre;
+    } else {
+      receptorId = conversacion.anunciante_id;
+      nombreReceptor = conversacion.anunciante_nombre;
+    }
+
+    // 🔹 Mostrar encabezado con el nombre del receptor
+    const chatHeader = document.querySelector(".chat-header");
+    if (chatHeader) {
+      chatHeader.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <img src="${anuncio.imagenes?.[0]?.path || 'img/default.png'}"
+              alt="Imagen anuncio"
+              style="width: 40px; height: 40px; object-fit: cover; border-radius: 50%; box-shadow: 0 0 4px rgba(0,0,0,0.2);">
+          <span style="font-weight: bold; font-size: 1rem;">${nombreReceptor}</span>
+        </div>
+      `;
+    }
+
   } catch (error) {
-    console.error("Error cargando anuncio:", error);
+    console.error("Error cargando anuncio o conversación:", error);
   }
 
-  // Cargar mensajes de la conversación
+  // 🔹 Cargar mensajes
   const mensajesDiv = document.getElementById("mensajes");
 
   async function cargarMensajes() {
@@ -39,10 +66,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       const mensajes = await res.json();
 
       mensajesDiv.innerHTML = mensajes.map(m =>
-        `<div style="margin: 4px 0; text-align: ${m.emisor_id == usuarioId ? 'right' : 'left'}">
-          <span style="background: #eee; padding: 6px; border-radius: 6px;">
-            ${m.contenido}
-          </span>
+        `<div class="${m.emisor_id == usuarioId ? 'enviado' : 'recibido'}">
+          ${m.contenido}
         </div>`
       ).join("");
       mensajesDiv.scrollTop = mensajesDiv.scrollHeight;
@@ -53,7 +78,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   await cargarMensajes();
 
-  // Enviar mensaje
+  // 🔹 Enviar mensaje
   const input = document.getElementById("mensaje-input");
   const btnEnviar = document.getElementById("enviar");
 
@@ -68,7 +93,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         body: JSON.stringify({
           contenido: texto,
           emisor_id: usuarioId,
-          receptor_id: 0, // Opcional: podés reemplazar por anunciante/interesado real
+          receptor_id: receptorId,
           conversacion_id: conversacionId
         })
       });

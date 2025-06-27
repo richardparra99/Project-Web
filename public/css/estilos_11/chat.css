@@ -1,35 +1,19 @@
-/* chat.css */
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: "Segoe UI", sans-serif;
-}
-
-body {
-  background-color: #f7f8fc;
-  color: #333;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
+/* ✅ Estilo base: MÓVIL por defecto */
 main {
   display: flex;
+  flex-direction: column;
   height: 100vh;
 }
 
 /* Columna del anuncio */
 #anuncio-info {
-  flex: 1;
-  padding: 2rem;
+  padding: 1rem;
   background-color: #fff;
-  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
 }
 
 #anuncio-info h2 {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   margin-bottom: 0.5rem;
 }
 
@@ -47,12 +31,37 @@ main {
 
 /* Columna del chat */
 #chat-box {
-  flex: 2;
   display: flex;
   flex-direction: column;
-  padding: 2rem;
+  padding: 1rem;
   background-color: #f1f4f8;
+  flex: 1;
 }
+
+.chat-header {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  background-color: #f1f4f8;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  margin-bottom: 1rem;
+}
+
+.chat-header img {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.chat-header #anunciante-nombre {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #333;
+}
+
 
 #mensajes {
   flex: 1;
@@ -66,7 +75,7 @@ main {
 
 #mensajes div {
   margin-bottom: 0.5rem;
-  max-width: 70%;
+  max-width: 85%;
   padding: 0.6rem 1rem;
   border-radius: 15px;
   font-size: 0.95rem;
@@ -86,8 +95,8 @@ main {
 }
 
 #mensaje-input {
-  width: 100%;
-  height: 60px;
+  width: 97%;
+  min-height: 60px;
   padding: 0.75rem;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -110,4 +119,47 @@ main {
 
 #enviar:hover {
   background-color: #0056b3;
+}
+
+/* 📱 TABLET (768px+) */
+@media (min-width: 768px) {
+  main {
+    flex-direction: row;
+  }
+
+  #anuncio-info {
+    flex: 1;
+    border-bottom: none;
+    border-right: 1px solid #ccc;
+    padding: 1.5rem;
+  }
+
+  #chat-box {
+    flex: 2;
+    padding: 1.5rem;
+  }
+
+  #mensajes div {
+    max-width: 75%;
+  }
+}
+
+/* 💻 DESKTOP (1024px+) */
+@media (min-width: 992px) {
+  #anuncio-info h2 {
+    font-size: 1.5rem;
+  }
+
+  #mensajes div {
+    max-width: 60%;
+    font-size: 1rem;
+  }
+
+  #mensaje-input {
+    font-size: 1.1rem;
+  }
+
+  #enviar {
+    font-size: 1rem;
+  }
 }

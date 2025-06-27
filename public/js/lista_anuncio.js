@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           }
 
           const data = await res.json();
-          console.log("✅ Conversación creada o reutilizada:", data);
+          console.log("Conversación creada o reutilizada:", data);
 
           if (!data || !data.id) {
             throw new Error("No se pudo crear conversación (sin ID)");
@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           // Redirigir al chat con anuncio
           window.location.href = `chat_anuncio.html?conversacionId=${data.id}&anuncioId=${anuncio.id}`;
         } catch (error) {
-          console.error("❌ Error al iniciar conversación:", error);
+          console.error("Error al iniciar conversación:", error);
           alert("Error al iniciar conversación.");
         }
       });

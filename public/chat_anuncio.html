@@ -9,15 +9,16 @@
 </head>
 <body>
   <header class="navbar">
-                <img class="logo_facebook" src="img/logo_facebook.png" alt="logo_facebook">
-                <h1 class="navbar__title">!Marketplace!</h1>
-                <div class="navbar__buttons">
-                    <nav class="menu">
-                        <label class="menu-mobile-label" for="menu-switch">
-                            <i class="fa-solid fa-bars"></i>
-                            Menu
-                        </label>
-                        <input id="menu-switch" type="checkbox">
+        <img class="logo_facebook" src="img/logo_facebook.png" alt="logo_facebook">
+        <h1 class="navbar__title">!Marketplace!</h1>
+
+        <div class="navbar__buttons">
+            <nav class="menu">
+                <label class="menu-mobile-label" for="menu-switch">
+                    <i class="fa-solid fa-bars"></i>
+                        Menu
+                    </label>
+                    <input id="menu-switch" type="checkbox">
                         <ul class="menu-links" id="menu-links">
                             <li>
                                 <button  class="navbar__buttons__i"><a href="inicio_sesion.html">Iniciar sesion!</a></button>
@@ -33,29 +34,23 @@
                 </div>
             </header>
             <hr>
-  <main style="display: flex;">
-    <!-- Columna izquierda: info del anuncio -->
-    <div id="anuncio-info" style="flex: 1; padding: 1rem; border-right: 1px solid #ccc;"></div>
+            <main>
+                <div id="anuncio-info"></div>
 
-    <!-- Columna derecha: chat -->
-    <div id="chat-box" style="flex: 2; padding: 1rem;">
-      <div id="mensajes" style="height: 300px; overflow-y: auto; border: 1px solid #ccc; margin-bottom: 10px;"></div>
-      <textarea id="mensaje-input" placeholder="Escribe tu mensaje..."></textarea>
-      <button id="enviar">Enviar</button>
-    </div>
-  </main>
-  <footer>
-                <div class="footer">
-                    <div class="caja_preguntas">
-                        <p>1. ¿Cómo puedo publicar un anuncio en el Marketplace?</p>
-                        <p>2. ¿Qué tipo de productos están permitidos en el Marketplace?</p>
-                        <p>3. ¿Es seguro realizar compras a través de esta plataforma?</p>
-                    </div>
-                    <p>Desarrollado por: <a href="">Richard Parra Zegarra</a></p>
+                <!-- Columna derecha: chat -->
+                <div id="chat-box">
+                <!-- Encabezado con foto + nombre -->
+                <div class="chat-header">
+                    <img id="anunciante-foto" src="img/default-user.png" alt="Foto anunciante" />
+                    <span id="anunciante-nombre">Anunciante</span>
                 </div>
-            </footer>
 
-  <script src="js/session.js"></script>
-  <script src="js/chat_anuncio.js"></script>
-</body>
+                <div id="mensajes"></div>
+                <textarea id="mensaje-input" placeholder="Escribe tu mensaje..."></textarea>
+                <button id="enviar">Enviar</button>
+                </div>
+            </main>
+            <script src="js/session.js"></script>
+            <script src="js/chat_anuncio.js"></script>
+    </body>
 </html>

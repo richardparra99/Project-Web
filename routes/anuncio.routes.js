@@ -35,6 +35,8 @@ router.delete("/:id", anuncioController.eliminarAnuncio);
 
 router.get("/listado", anuncioController.listarAnunciosPublicos);
 
-
+router.get('/mis-anuncios-con-interesados/:usuarioId', anuncioController.obtenerAnunciosConInteresados);
+router.get('/anuncios-conversaciones/:usuarioId', anuncioController.obtenerAnunciosConConversaciones);
+router.get("/chats/ventas/:usuarioId", anuncioController.obtenerAnunciosConChats);
 
 module.exports = router;

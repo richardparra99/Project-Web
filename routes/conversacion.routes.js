@@ -6,4 +6,8 @@ router.get("/", conversacionController.obtenerConversaciones);
 
 router.post("/", conversacionController.iniciarConversacion);
 
+router.get("/anuncio/:anuncioId", conversacionController.obtenerConversacionesPorAnuncio);
+
+router.get('/:id', conversacionController.obtenerConversacionPorId); 
+
 module.exports = router;

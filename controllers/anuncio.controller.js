@@ -166,14 +166,19 @@ const obtenerAnuncioPorId = async (req, res) => {
 
   try {
     const result = await pool.query(
-      `SELECT a.*, u.nombre_completo, c.nombre AS categoria_nombre, ea.nombre AS estado_nombre
-       FROM anuncio a
-       JOIN usuario u ON u.id = a.usuario_id
-       LEFT JOIN categoria c ON c.id = a.categoria_id
-       LEFT JOIN estado_anuncio ea ON ea.id = a.estado_id
-       WHERE a.id = $1`,
-      [id]
-    );
+    `SELECT a.*, u.nombre_completo, c.nombre AS categoria_nombre, ea.nombre AS estado_nombre,
+      (
+        SELECT json_agg(i.*)
+        FROM imagen i
+        WHERE i.anuncio_id = a.id
+      ) AS imagenes
+    FROM anuncio a
+    JOIN usuario u ON u.id = a.usuario_id
+    LEFT JOIN categoria c ON c.id = a.categoria_id
+    LEFT JOIN estado_anuncio ea ON ea.id = a.estado_id
+    WHERE a.id = $1`,
+    [id]
+);
 
     if (result.rows.length === 0) {
       return res.status(404).json({ mensaje: "Anuncio no encontrado" });
@@ -250,10 +255,97 @@ const listarAnunciosPublicos = async (req, res) => {
 };
 
 
+const obtenerAnunciosConInteresados = async (req, res) => {
+  const usuarioId = req.params.usuarioId;
+
+  try {
+    const anuncios = await pool.query(
+      `SELECT a.id, a.titulo, a.descripcion, a.precio, a.usuario_id, u.nombre_completo,
+              ARRAY(
+                SELECT DISTINCT interesado_id
+                FROM conversacion
+                WHERE anuncio_id = a.id
+              ) AS interesados
+       FROM anuncio a
+       JOIN usuario u ON a.usuario_id = u.id
+       WHERE a.usuario_id = $1`,
+      [usuarioId]
+    );
+
+    res.json(anuncios.rows);
+  } catch (error) {
+    console.error("Error al obtener anuncios con interesados:", error);
+    res.status(500).json({ error: "Error interno del servidor" });
+  }
+};
+
+
+const obtenerAnunciosConConversaciones = async (req, res) => {
+  const { usuarioId } = req.params;
+
+  try {
+    const query = `
+      SELECT a.id, a.titulo, a.descripcion, a.precio, 
+             COUNT(c.id) AS cantidad_conversaciones,
+             COALESCE(i.path, NULL) AS imagen
+      FROM anuncio a
+      LEFT JOIN conversacion c ON a.id = c.anuncio_id
+      LEFT JOIN imagen_anuncio i ON i.anuncio_id = a.id
+      WHERE a.usuario_id = $1
+      GROUP BY a.id, i.path
+      ORDER BY a.id DESC
+    `;
+
+    const { rows } = await pool.query(query, [usuarioId]);
+
+    res.json(rows);
+  } catch (error) {
+    console.error('Error al obtener anuncios con conversaciones:', error);
+    res.status(500).json({ error: 'Error interno al obtener los anuncios con conversaciones' });
+  }
+};
+
+const obtenerAnunciosConChats = async (req, res) => {
+  const usuarioId = req.params.usuarioId;
+
+  try {
+    const result = await pool.query(`
+      SELECT 
+        a.*, 
+        COALESCE(COUNT(c.id), 0) AS cantidad_chats
+      FROM anuncio a
+      LEFT JOIN conversacion c ON c.anuncio_id = a.id
+      WHERE a.usuario_id = $1
+      GROUP BY a.id
+      ORDER BY a.id DESC
+    `, [usuarioId]);
+
+    // Obtener imágenes por anuncio
+    const anuncios = await Promise.all(result.rows.map(async (anuncio) => {
+      const imagenes = await pool.query(
+        'SELECT path FROM imagen WHERE anuncio_id = $1',
+        [anuncio.id]
+      );
+      return {
+        ...anuncio,
+        imagenes: imagenes.rows
+      };
+    }));
+
+    res.json(anuncios);
+  } catch (error) {
+    console.error("Error en obtenerAnunciosConChats:", error);
+    res.status(500).json({ error: "Error al obtener anuncios con chats." });
+  }
+};
+
+
 
 
 module.exports = { 
   crearAnuncio, obtenerAnunciosPorUsuario, 
   cambiarEstadoAnuncio, eliminarAnuncio, obtenerAnunciosDestacados, 
   obtenerAnunciosPublicos, obtenerAnuncioPorId, actualizarAnuncio,
-  listarAnunciosPublicos };
+  listarAnunciosPublicos, obtenerAnunciosConInteresados,
+  obtenerAnunciosConConversaciones, 
+  obtenerAnunciosConChats};
