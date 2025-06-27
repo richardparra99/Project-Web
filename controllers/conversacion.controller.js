@@ -48,7 +48,63 @@ const iniciarConversacion = async (req, res) => {
 
 
 
+const obtenerConversacionesPorAnuncio = async (req, res) => {
+  const anuncioId = req.params.anuncioId;
+
+  try {
+    const result = await pool.query(`
+      SELECT 
+        c.id,
+        c.anuncio_id,
+        c.interesado_id,
+        u.nombre_completo AS interesado_nombre,
+        (
+          SELECT contenido 
+          FROM mensaje 
+          WHERE conversacion_id = c.id 
+          ORDER BY fecha_envio DESC 
+          LIMIT 1
+        ) AS ultimo_mensaje
+      FROM conversacion c
+      JOIN usuario u ON u.id = c.interesado_id
+      WHERE c.anuncio_id = $1
+      ORDER BY c.id DESC
+    `, [anuncioId]);
+
+    res.json(result.rows);
+  } catch (error) {
+    console.error("Error al obtener conversaciones por anuncio:", error);
+    res.status(500).json({ error: "Error al obtener conversaciones." });
+  }
+};
+
+const obtenerConversacionPorId = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await pool.query(`
+      SELECT c.*, 
+             u1.nombre_completo AS anunciante_nombre,
+             u2.nombre_completo AS interesado_nombre
+      FROM conversacion c
+      JOIN usuario u1 ON u1.id = c.anunciante_id
+      JOIN usuario u2 ON u2.id = c.interesado_id
+      WHERE c.id = $1
+    `, [id]);
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Conversación no encontrada' });
+    }
+
+    res.json(result.rows[0]);
+  } catch (error) {
+    console.error('Error al obtener conversación:', error);
+    res.status(500).json({ error: 'Error al obtener la conversación' });
+  }
+};
+
+
 
 module.exports = {
-  iniciarConversacion, obtenerConversaciones
+  iniciarConversacion, obtenerConversaciones ,
+  obtenerConversacionesPorAnuncio, obtenerConversacionPorId
 };

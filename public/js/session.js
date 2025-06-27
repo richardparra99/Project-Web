@@ -17,13 +17,17 @@ document.addEventListener("DOMContentLoaded", () => {
       <li>
         <button class="navbar__buttons__i"><a href="mis_anuncios.html">Mis Anuncios</a></button>
       </li>
+      ${!paginaActual.includes("chat_anuncio.html") && 
+      !paginaActual.includes("chat_venta.html") && 
+      !paginaActual.includes("chats_por_anuncio.html") ? `
       <li style="position: relative;">
         <button class="navbar__buttons__i" id="btn-chats">Chats</button>
         <div id="subchats" class="subcategorias oculto">
-          <a href="chat_compra.html"><button class="subchats-compras">Compras</button></a>
-          <a href="chat_venta.html"><button class="subchats-ventas">Ventas</button></a>
+          <button class="btn-ventas" onclick="window.location.href='chat_venta.html'">Ventas</button>
         </div>
       </li>
+    ` : ""}
+
       <li>
         <button class="navbar__buttons__r"><a href="producto_guardado.html">Guardados</a></button>
       </li>
@@ -55,6 +59,9 @@ document.addEventListener("DOMContentLoaded", () => {
         location.reload();
       });
     }, 0);
+
+    
+
   } else {
     // Usuario no logueado
     menuLinks.innerHTML = `

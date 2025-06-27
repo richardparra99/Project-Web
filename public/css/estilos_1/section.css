@@ -104,7 +104,6 @@
     top: 80%;
     left: 0;
     padding: 10px;
-    border-radius: 5px;
     z-index: 100;
     flex-direction: column;
     gap: 3px;
@@ -373,26 +372,23 @@
         top: 80%;
         left: 0;
         padding: 10px;
-        border-radius: 5px;
         z-index: 100;
         flex-direction: column;
         gap: 3px;
         margin-left: -20px;
-        width: 80px;
+        width: 88px;
+        margin-top: 0px;
     }
 
     .subcategorias button {
         display: block;
         width: 100%;
-        padding: 10px 75px 10px 25px;
-        background: #ffffff;
+        padding: 10px 75px 10px 30px;
         border: none;
         cursor: pointer;
-        margin: 1px -50px 1px -10px;
         background-color: var(--color-azul);
         color: white;
     }
-
     .subcategorias button:hover {
         background-color: var(--color-azul-hover);
     }

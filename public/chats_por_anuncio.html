@@ -2,16 +2,15 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Mis Ventas - Marketplace</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="css/estilos_1/header.css" />
-  <link rel="stylesheet" href="css/estilos_1/footer.css" />
-  <link rel="stylesheet" href="css/estilos_1/chatVenta.css" />
+  <title>Conversaciones por Anuncio</title>
+  <link rel="stylesheet" href="css/estilos_1/header.css">
+  <link rel="stylesheet" href="css/estilos_1/footer.css">
 </head>
 <body>
   <header class="navbar">
     <img class="logo_facebook" src="img/logo_facebook.png" alt="logo_facebook" />
-    <h1 class="navbar__title">¡Marketplace - Ventas!</h1>
+    <h1 class="navbar__title">¡Conversaciones por anuncio!</h1>
     <div class="navbar__buttons">
       <nav class="menu">
         <label class="menu-mobile-label" for="menu-switch">
@@ -26,28 +25,15 @@
       </nav>
     </div>
   </header>
+  <hr>
+  <main style="padding: 2rem; max-width: 800px; margin: auto">
+    <div id="anuncio-detalle" style="margin-bottom: 2rem;"></div>
 
-  <hr />
-
-  <main>
-    <h2>Mis Anuncios y Chats de Venta</h2>
-    <div id="mis-anuncios" class="anuncios-contenedor">
-      <p class="no-anuncios">Cargando anuncios...</p>
-    </div>
+    <h2>Interesados:</h2>
+    <div id="conversaciones-lista"></div>
   </main>
 
-  <footer>
-    <div class="footer">
-      <div class="caja_preguntas">
-        <p>1. ¿Cómo puedo publicar un anuncio en el Marketplace?</p>
-        <p>2. ¿Qué tipo de productos están permitidos en el Marketplace?</p>
-        <p>3. ¿Es seguro realizar compras a través de esta plataforma?</p>
-      </div>
-      <p>Desarrollado por: <a href="#">Richard Parra Zegarra</a></p>
-    </div>
-  </footer>
-
   <script src="js/session.js"></script>
-  <script src="js/chatVenta.js"></script>
+  <script src="js/chat_por_anuncio.js"></script>
 </body>
 </html>
