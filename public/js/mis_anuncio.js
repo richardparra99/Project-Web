@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const card = document.createElement("article");
       card.className = "section_anuncio_articulo";
 
-      const imagenSrc = anuncio.imagenes?.[0].path || "img/default.png";
+      const imagenSrc = anuncio.imagenes?.[0]?.path || "img/default.png";
 
       card.innerHTML = `
         <img src="${imagenSrc}" alt="imagen-anuncio">

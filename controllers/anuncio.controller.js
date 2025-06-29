@@ -168,7 +168,7 @@ const obtenerAnuncioPorId = async (req, res) => {
     const result = await pool.query(
     `SELECT a.*, u.nombre_completo, c.nombre AS categoria_nombre, ea.nombre AS estado_nombre,
       (
-        SELECT json_agg(i.*)
+        SELECT json_agg(json_build_object('id', i.id, 'path', i.path))
         FROM imagen i
         WHERE i.anuncio_id = a.id
       ) AS imagenes
@@ -178,7 +178,7 @@ const obtenerAnuncioPorId = async (req, res) => {
     LEFT JOIN estado_anuncio ea ON ea.id = a.estado_id
     WHERE a.id = $1`,
     [id]
-);
+    );
 
     if (result.rows.length === 0) {
       return res.status(404).json({ mensaje: "Anuncio no encontrado" });
@@ -191,6 +191,7 @@ const obtenerAnuncioPorId = async (req, res) => {
   }
 };
 
+
 const actualizarAnuncio = async (req, res) => {
   const { id } = req.params;
   const {
@@ -201,18 +202,37 @@ const actualizarAnuncio = async (req, res) => {
     estado_id
   } = req.body;
 
+  let imagenesActuales = req.body['imagenes_actuales[]'];
+  if (!imagenesActuales) {
+    imagenesActuales = [];
+  } else if (!Array.isArray(imagenesActuales)) {
+    imagenesActuales = [imagenesActuales];
+  }
+
   try {
-    const result = await pool.query(
+    await pool.query(
       `UPDATE anuncio SET
         titulo = $1,
         descripcion = $2,
         precio = $3,
         categoria_id = $4,
         estado_id = $5
-      WHERE id = $6
-      RETURNING *`,
+      WHERE id = $6`,
       [titulo, descripcion, precio, categoria_id, estado_id, id]
     );
+
+    if (imagenesActuales.length > 0) {
+      await pool.query(
+        `DELETE FROM imagen 
+         WHERE anuncio_id = $1 AND id NOT IN (${imagenesActuales.map((_, i) => `$${i + 2}`).join(", ")})`,
+        [id, ...imagenesActuales]
+      );
+    } else {
+      await pool.query(
+        `DELETE FROM imagen WHERE anuncio_id = $1`,
+        [id]
+      );
+    }
 
     if (req.files && req.files.length > 0) {
       const insertPromises = req.files.map(file =>
@@ -231,6 +251,7 @@ const actualizarAnuncio = async (req, res) => {
     res.status(500).json({ mensaje: "Error del servidor al actualizar el anuncio" });
   }
 };
+
 
 const listarAnunciosPublicos = async (req, res) => {
   try {

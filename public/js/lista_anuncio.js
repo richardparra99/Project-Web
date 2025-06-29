@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const contenedor = document.getElementById("contenedor-lista-anuncios");
   if (!contenedor) return;
 
-  const usuarioId = localStorage.getItem("usuarioId"); // ⚠️ Traemos el usuario logueado aquí
+  const usuarioId = localStorage.getItem("usuarioId");
 
   try {
     const res = await fetch("/anuncios/listado");
@@ -27,12 +27,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     anuncios.forEach(anuncio => {
       const card = document.createElement("article");
       card.className = "section_anuncio_articulo";
-      
+
       console.log("Anuncio debug:", anuncio);
 
       const imagen = anuncio.imagenes?.[0]?.path || "img/default.png";
 
-      const esMio = usuarioId && parseInt(usuarioId) === anuncio.usuario_id; // 🔍 Validación clave
+      const esMio = usuarioId && parseInt(usuarioId) === anuncio.usuario_id;
 
       card.innerHTML = `
         <img src="${imagen}" alt="imagen-anuncio">
@@ -130,3 +130,43 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 });
+
+// ✅ SLIDER MODAL
+function abrirModal(anuncio) {
+  const modal = document.getElementById("modal");
+  const modalImg = document.getElementById("modal-img");
+  const modalNombre = document.getElementById("modal-nombre");
+  const modalDescripcion = document.getElementById("modal-descripcion");
+  const modalPrecio = document.getElementById("modal-precio");
+  const modalPublicado = document.getElementById("modal-publicado");
+
+  let imagenes = anuncio.imagenes?.map(img => img.path) || ["img/default.png"];
+  let indiceActual = 0;
+
+  function actualizarImagen() {
+    modalImg.src = imagenes[indiceActual];
+  }
+
+  actualizarImagen(); // mostrar la primera imagen
+
+  modalNombre.textContent = anuncio.titulo;
+  modalDescripcion.textContent = anuncio.descripcion;
+  modalPrecio.textContent = `Precio: Bs. ${anuncio.precio}`;
+  modalPublicado.textContent = `Publicado por: ${anuncio.nombre_completo}`;
+
+  modal.style.display = "block";
+
+  document.getElementById("prevBtn").onclick = () => {
+    indiceActual = (indiceActual - 1 + imagenes.length) % imagenes.length;
+    actualizarImagen();
+  };
+
+  document.getElementById("nextBtn").onclick = () => {
+    indiceActual = (indiceActual + 1) % imagenes.length;
+    actualizarImagen();
+  };
+}
+
+function cerrarModal() {
+  document.getElementById("modal").style.display = "none";
+}
