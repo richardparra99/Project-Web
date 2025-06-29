@@ -26,10 +26,11 @@ const upload = multer({
 
 router.post("/", upload.array("imagenes"), anuncioController.crearAnuncio);
 
+router.put("/:id", upload.array("imagenes"), anuncioController.actualizarAnuncio);
+
 router.get("/listado", anuncioController.obtenerAnunciosPublicos);
 router.get("/usuario/:id", anuncioController.obtenerAnunciosPorUsuario);
 router.get("/:id", anuncioController.obtenerAnuncioPorId);
-router.put("/:id", anuncioController.actualizarAnuncio);
 router.put("/:id/estado", anuncioController.cambiarEstadoAnuncio);
 router.delete("/:id", anuncioController.eliminarAnuncio);
 

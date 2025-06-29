@@ -55,7 +55,13 @@
             <div class="modal" id="modal" style="display: none;">
                 <div class="modal-content">
                     <span class="close" onclick="cerrarModal()">&times;</span>
-                    <img id="modal-img" src="img/default.png" alt="imagen-anuncio" />
+
+                    <div style="display: flex; align-items: center; justify-content: center;">
+                        <button id="prevBtn" style="font-size: 1.5rem;">&#10094;</button>
+                        <img id="modal-img" src="img/default.png" alt="imagen-anuncio" style="max-width: 300px; margin: 0 10px;" />
+                        <button id="nextBtn" style="font-size: 1.5rem;">&#10095;</button>
+                    </div>
+
                     <h3 id="modal-nombre"></h3>
                     <p id="modal-descripcion"></p>
                     <p id="modal-precio"></p>
