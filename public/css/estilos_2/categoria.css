@@ -1,0 +1,39 @@
+:root {
+    --color-azul: #196eb4;
+    --color-azul-hover: #033157;
+    --color-blanco: #FFFFFF;
+    --color-oscuro: #363636;
+    --color-oscuro-hover: #070707;
+    --color-rojo: #FF7A7B;
+    --color-rojo-hover: #FF2929;
+    --tiempo-animacion:300ms;
+}
+
+
+.btn-categoria {
+    background-color: var(--color-azul);
+    gap: 10px;
+    margin-left: 10px;
+    color: var(--color-blanco);
+    padding: 10px 20px 10px 20px;
+}
+
+.btn-categoria:hover {
+    background-color: var(--color-azul-hover);
+}
+
+.btn-categoria {
+    transition: var(--tiempo-animacion);
+}
+
+p {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h2 {
+    font-family: Arial, Helvetica, sans-serif;
+}

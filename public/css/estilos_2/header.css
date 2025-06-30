@@ -62,8 +62,10 @@ form {
 
 .btnCategoria {
     text-align: center;
-    padding-left: 75px;
-    padding-right: 75px;
+    padding: 12px 70px 12px 70px;
+    background-color: var(--color-blanco);
+    border: 2px solid rgb(231, 231, 231);
+    color: black;
 }
 
 .btnCrear {

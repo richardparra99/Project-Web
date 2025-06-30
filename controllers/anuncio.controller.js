@@ -1,55 +1,42 @@
 const pool = require('../conexion/db');
 
 const crearAnuncio = async (req, res) => {
+  const { titulo, descripcion, precio, usuario_id, categoria_id } = req.body;
+
   try {
-    const { titulo, descripcion, precio, usuario_id, categoria_nombre } = req.body;
-
-    const imagenes = req.files?.map(file => ({
-      nombre: file.originalname,
-      path: `/uploads/${file.filename}`,
-      temporal: false
-    })) || [];
-
-    let categoriaId;
-    const catResult = await pool.query('SELECT id FROM categoria WHERE nombre = $1', [categoria_nombre]);
-    if (catResult.rows.length > 0) {
-      categoriaId = catResult.rows[0].id;
-    } else {
-      const insertCat = await pool.query(
-        'INSERT INTO categoria (nombre, descripcion) VALUES ($1, $2) RETURNING id',
-        [categoria_nombre, '']
-      );
-      categoriaId = insertCat.rows[0].id;
+    if (!categoria_id) {
+      return res.status(400).json({ mensaje: "Categoría no especificada" });
     }
 
-    const estadoResult = await pool.query('SELECT id FROM estado_anuncio WHERE nombre = $1', ['Activo']);
-    const estadoId = estadoResult.rows.length > 0
-      ? estadoResult.rows[0].id
-      : (await pool.query('INSERT INTO estado_anuncio (nombre) VALUES ($1) RETURNING id', ['Activo'])).rows[0].id;
-
+    // Insertar el anuncio directamente
     const result = await pool.query(
       `INSERT INTO anuncio (titulo, descripcion, precio, usuario_id, categoria_id, estado_id)
-       VALUES ($1, $2, $3, $4, $5, $6)
-       RETURNING id`,
-      [titulo, descripcion, precio, usuario_id, categoriaId, estadoId]
+       VALUES ($1, $2, $3, $4, $5, 1) RETURNING id`,
+      [titulo, descripcion, precio, usuario_id, categoria_id]
     );
 
     const anuncioId = result.rows[0].id;
 
-    for (const img of imagenes) {
-      await pool.query(
-        `INSERT INTO imagen (nombre, path, temporal, fecha_subida, anuncio_id)
-         VALUES ($1, $2, $3, NOW(), $4)`,
-        [img.nombre, img.path, img.temporal, anuncioId]
+    // Insertar imágenes
+    if (req.files && req.files.length > 0) {
+      const insertPromises = req.files.map(file =>
+        pool.query(
+          `INSERT INTO imagen (nombre, path, temporal, fecha_subida, anuncio_id)
+           VALUES ($1, $2, false, CURRENT_TIMESTAMP, $3)`,
+          [file.originalname, `/uploads/${file.filename}`, anuncioId]
+        )
       );
+      await Promise.all(insertPromises);
     }
 
-    res.status(201).json({ mensaje: "Anuncio creado con éxito", anuncioId });
+    res.json({ mensaje: 'Anuncio creado correctamente', anuncioId });
   } catch (error) {
     console.error("Error al crear anuncio:", error);
-    res.status(500).json({ mensaje: "Error del servidor al crear el anuncio." });
+    res.status(500).json({ mensaje: "Error del servidor al crear el anuncio" });
   }
 };
+
+
 
 const obtenerAnunciosPorUsuario = async (req, res) => {
   const { id } = req.params;
