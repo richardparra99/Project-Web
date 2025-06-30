@@ -74,6 +74,23 @@ const obtenerCategorias = async (req, res) => {
   }
 };
 
+const listarCategorias = async (req, res) => {
+  try {
+    const result = await pool.query("SELECT id, nombre FROM categoria ORDER BY nombre");
+    res.json(result.rows);
+  } catch (error) {
+    console.error("Error al listar categorías:", error);
+    res.status(500).json({ mensaje: "Error al obtener categorías" });
+  }
+};
+
+
+
+
+
+
+
+
 const eliminarCategoria = async (req, res) => {
   const { id } = req.params;
 
@@ -88,5 +105,5 @@ const eliminarCategoria = async (req, res) => {
 
 
 module.exports = {
-  obtenerAnunciosPorCategoria, obtenerCategorias, eliminarCategoria
+  obtenerAnunciosPorCategoria, obtenerCategorias, eliminarCategoria, listarCategorias
 };

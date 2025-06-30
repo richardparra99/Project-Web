@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Categorías</title>
+  <link rel="stylesheet" href="css/estilos_1/header.css">
+  <link rel="stylesheet" href="css/estilos_1/footer.css">
+  <link rel="stylesheet" href="css/estilos_2/categoria.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <header class="navbar">
+                <img class="logo_facebook" src="img/logo_facebook.png" alt="logo_facebook">
+                <h1 class="navbar__title">!Categorias!</h1>
+                <div class="navbar__buttons">
+                    <nav class="menu">
+                        <label class="menu-mobile-label" for="menu-switch">
+                            <i class="fa-solid fa-bars"></i>
+                            Menu
+                        </label>
+                        <input id="menu-switch" type="checkbox">
+                        <ul class="menu-links" id="menu-links">
+                            <li>
+                                <button  class="navbar__buttons__i"><a href="inicio_sesion.html">Iniciar sesion!</a></button>
+                            </li>
+                            <li>
+                                <button class="navbar__buttons__l"><a href="lista_anuncio.html">Lista anuncio</a></button>
+                            </li>
+                            <li>
+                                <button class="navbar__buttons__r"><a href="registrarse.html">Registrarse</a></button>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </header>
+            <hr>
+            <main>
+                <h1>Selecciona una categoría</h1>
+                <div id="contenedor-categorias"></div>
+
+                <h2>Anuncios de la categoría seleccionada</h2>
+                <div id="contenedor-anuncios"></div>
+            </main>
+            <script src="js/session.js"></script>
+            <script src="js/categorias.js"></script>
+    </body>
+</html>

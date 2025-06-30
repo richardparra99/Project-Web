@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (!contenedor) return;
 
   const usuarioId = localStorage.getItem("usuarioId");
+  let anunciosGlobal = []; // ⭐ Para almacenar todos los anuncios
 
   try {
     const res = await fetch("/anuncios/listado");
@@ -17,6 +18,17 @@ document.addEventListener("DOMContentLoaded", async () => {
       throw new Error("El servidor no devolvió JSON válido.");
     }
 
+    anunciosGlobal = anuncios; // ⭐ guardamos global
+    mostrarAnuncios(anunciosGlobal);
+
+  } catch (error) {
+    console.error("Error al cargar anuncios:", error);
+    if (contenedor) {
+      contenedor.innerHTML = "<p>Error al cargar los anuncios. Intenta más tarde.</p>";
+    }
+  }
+
+  function mostrarAnuncios(anuncios) {
     if (!Array.isArray(anuncios) || anuncios.length === 0) {
       contenedor.innerHTML = "<p>No hay anuncios disponibles.</p>";
       return;
@@ -123,12 +135,27 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       contenedor.appendChild(card);
     });
-  } catch (error) {
-    console.error("Error al cargar anuncios:", error);
-    if (contenedor) {
-      contenedor.innerHTML = "<p>Error al cargar los anuncios. Intenta más tarde.</p>";
-    }
   }
+
+  // ✅ Buscador
+  const formBuscar = document.querySelector("form");
+  const inputBuscar = formBuscar.querySelector("input[type='search']");
+  formBuscar.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const query = inputBuscar.value.trim().toLowerCase();
+
+    if (!query) {
+      mostrarAnuncios(anunciosGlobal);
+      return;
+    }
+
+    const filtrados = anunciosGlobal.filter(anuncio =>
+      anuncio.titulo.toLowerCase().includes(query) ||
+      anuncio.descripcion.toLowerCase().includes(query)
+    );
+
+    mostrarAnuncios(filtrados);
+  });
 });
 
 // ✅ SLIDER MODAL
@@ -147,7 +174,7 @@ function abrirModal(anuncio) {
     modalImg.src = imagenes[indiceActual];
   }
 
-  actualizarImagen(); // mostrar la primera imagen
+  actualizarImagen();
 
   modalNombre.textContent = anuncio.titulo;
   modalDescripcion.textContent = anuncio.descripcion;

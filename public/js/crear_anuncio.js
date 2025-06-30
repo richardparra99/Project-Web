@@ -6,6 +6,25 @@ function limpiarErrores() {
   inputs.forEach(input => input.classList.remove("error-input"));
 }
 
+// ⚡ Nuevo: cargar categorías en el select
+document.addEventListener("DOMContentLoaded", async () => {
+  const selectCategoria = document.getElementById("categoria");
+
+  try {
+    const res = await fetch("/categorias");
+    const categorias = await res.json();
+
+    categorias.forEach(cat => {
+      const option = document.createElement("option");
+      option.value = cat.id;
+      option.textContent = cat.nombre;
+      selectCategoria.appendChild(option);
+    });
+  } catch (error) {
+    console.error("Error al cargar categorías:", error);
+  }
+});
+
 document.getElementById("formCrearAnuncio").addEventListener("submit", async function (e) {
   e.preventDefault();
   limpiarErrores();
@@ -21,9 +40,8 @@ document.getElementById("formCrearAnuncio").addEventListener("submit", async fun
   const titulo = document.getElementById("titulo").value.trim();
   const descripcion = document.getElementById("descripcion").value.trim();
   const precio = parseFloat(document.getElementById("precio").value);
-  const categoriaNombre = document.getElementById("categoria").value.trim();
+  const categoriaId = document.getElementById("categoria").value;
   const imagenInput = document.getElementById("imagen");
-  //const archivos = Array.from(imagenInput.files);
 
   // Validaciones visuales
   if (!titulo) {
@@ -44,8 +62,8 @@ document.getElementById("formCrearAnuncio").addEventListener("submit", async fun
     hayError = true;
   }
 
-  if (!categoriaNombre) {
-    document.getElementById("error-categoria").textContent = "Por favor ingrese la categoría.";
+  if (!categoriaId) {
+    document.getElementById("error-categoria").textContent = "Por favor seleccione una categoría.";
     document.getElementById("categoria").classList.add("error-input");
     hayError = true;
   }
@@ -64,7 +82,7 @@ document.getElementById("formCrearAnuncio").addEventListener("submit", async fun
   formData.append("descripcion", descripcion);
   formData.append("precio", precio);
   formData.append("usuario_id", usuarioId);
-  formData.append("categoria_nombre", categoriaNombre);
+  formData.append("categoria_id", categoriaId);
 
   imagenesSeleccionadas.forEach(file => {
     formData.append("imagenes", file);
@@ -128,10 +146,7 @@ document.getElementById("imagen").addEventListener("change", function () {
       btnEliminar.style.lineHeight = "20px";
 
       btnEliminar.addEventListener("click", () => {
-        // Elimina visualmente
         preview.removeChild(container);
-
-        // Elimina del array
         imagenesSeleccionadas = imagenesSeleccionadas.filter(f => f !== file);
       });
 
