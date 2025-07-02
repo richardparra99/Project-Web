@@ -11,8 +11,9 @@ form#formEditarAnuncio {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+/* ✅ Incluimos select */
 form#formEditarAnuncio input,
-form#formEditarAnuncio {
+form#formEditarAnuncio select {
     padding: 10px;
     font-size: 1rem;
     border: 1px solid #ccc;
@@ -47,6 +48,7 @@ form#formEditarAnuncio button:hover {
     }
 
     form#formEditarAnuncio input,
+    form#formEditarAnuncio select,
     form#formEditarAnuncio textarea {
         font-size: 1.05rem;
     }
@@ -65,6 +67,7 @@ form#formEditarAnuncio button:hover {
     }
 
     form#formEditarAnuncio input,
+    form#formEditarAnuncio select,
     form#formEditarAnuncio textarea {
         font-size: 1.1rem;
     }
