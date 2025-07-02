@@ -350,10 +350,37 @@ const obtenerAnunciosConChats = async (req, res) => {
 
 
 
+const buscarAnuncios = async (req, res) => {
+  const { query } = req.query;
+
+  try {
+    const result = await pool.query(`
+      SELECT a.*, u.nombre_completo,
+      (
+        SELECT json_agg(i.*)
+        FROM imagen i
+        WHERE i.anuncio_id = a.id
+      ) AS imagenes
+      FROM anuncio a
+      JOIN usuario u ON u.id = a.usuario_id
+      WHERE a.titulo ILIKE $1 OR a.descripcion ILIKE $1
+      ORDER BY a.id DESC
+    `, [`%${query}%`]);
+
+    res.json(result.rows);
+  } catch (error) {
+    console.error("Error al buscar anuncios:", error);
+    res.status(500).json({ mensaje: "Error al buscar anuncios." });
+  }
+};
+
+
+
+
 module.exports = { 
   crearAnuncio, obtenerAnunciosPorUsuario, 
   cambiarEstadoAnuncio, eliminarAnuncio, obtenerAnunciosDestacados, 
   obtenerAnunciosPublicos, obtenerAnuncioPorId, actualizarAnuncio,
   listarAnunciosPublicos, obtenerAnunciosConInteresados,
   obtenerAnunciosConConversaciones, 
-  obtenerAnunciosConChats};
+  obtenerAnunciosConChats, buscarAnuncios};

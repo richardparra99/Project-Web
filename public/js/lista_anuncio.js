@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (!contenedor) return;
 
   const usuarioId = localStorage.getItem("usuarioId");
-  let anunciosGlobal = []; // ⭐ Para almacenar todos los anuncios
+  let anunciosGlobal = []; // ⭐ Para almacenar todos los anuncios iniciales
 
   try {
     const res = await fetch("/anuncios/listado");
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       throw new Error("El servidor no devolvió JSON válido.");
     }
 
-    anunciosGlobal = anuncios; // ⭐ guardamos global
+    anunciosGlobal = anuncios; 
     mostrarAnuncios(anunciosGlobal);
 
   } catch (error) {
@@ -137,24 +137,26 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  // ✅ Buscador
+  // ✅ Buscador con BACKEND
   const formBuscar = document.querySelector("form");
   const inputBuscar = formBuscar.querySelector("input[type='search']");
-  formBuscar.addEventListener("submit", (e) => {
+  formBuscar.addEventListener("submit", async (e) => {
     e.preventDefault();
-    const query = inputBuscar.value.trim().toLowerCase();
+    const query = inputBuscar.value.trim();
 
     if (!query) {
       mostrarAnuncios(anunciosGlobal);
       return;
     }
 
-    const filtrados = anunciosGlobal.filter(anuncio =>
-      anuncio.titulo.toLowerCase().includes(query) ||
-      anuncio.descripcion.toLowerCase().includes(query)
-    );
-
-    mostrarAnuncios(filtrados);
+    try {
+      const res = await fetch(`/anuncios/buscar?query=${encodeURIComponent(query)}`);
+      const anuncios = await res.json();
+      mostrarAnuncios(anuncios);
+    } catch (error) {
+      console.error("Error al buscar:", error);
+      contenedor.innerHTML = "<p>Error al buscar anuncios.</p>";
+    }
   });
 });
 

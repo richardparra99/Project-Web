@@ -30,6 +30,7 @@ router.put("/:id", upload.array("imagenes"), anuncioController.actualizarAnuncio
 
 router.get("/listado", anuncioController.obtenerAnunciosPublicos);
 router.get("/usuario/:id", anuncioController.obtenerAnunciosPorUsuario);
+router.get("/buscar", anuncioController.buscarAnuncios);
 router.get("/:id", anuncioController.obtenerAnuncioPorId);
 router.put("/:id/estado", anuncioController.cambiarEstadoAnuncio);
 router.delete("/:id", anuncioController.eliminarAnuncio);
@@ -39,5 +40,6 @@ router.get("/listado", anuncioController.listarAnunciosPublicos);
 router.get('/mis-anuncios-con-interesados/:usuarioId', anuncioController.obtenerAnunciosConInteresados);
 router.get('/anuncios-conversaciones/:usuarioId', anuncioController.obtenerAnunciosConConversaciones);
 router.get("/chats/ventas/:usuarioId", anuncioController.obtenerAnunciosConChats);
+
 
 module.exports = router;

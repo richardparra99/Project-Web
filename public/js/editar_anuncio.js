@@ -2,6 +2,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
 
+  console.log("ID del anuncio:", id);
+
   if (!id) {
     alert("ID de anuncio no especificado.");
     return;
@@ -16,18 +18,44 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   let imagenesActuales = [];
   let nuevasImagenes = [];
+  let categoriaActualId = null;
+
+  try {
+    const res = await fetch("/categorias");
+    const categorias = await res.json();
+
+    categorias.forEach(cat => {
+      const option = document.createElement("option");
+      option.value = cat.id;
+      option.textContent = cat.nombre;
+      categoria.appendChild(option);
+    });
+  } catch (error) {
+    console.error("Error al cargar categorías:", error);
+  }
 
   // ✅ Cargar datos actuales del anuncio
   try {
     const res = await fetch(`/anuncios/${id}`);
     const anuncio = await res.json();
 
+    console.log("Datos del anuncio cargado:", anuncio);
+
     titulo.value = anuncio.titulo;
     descripcion.value = anuncio.descripcion;
     precio.value = anuncio.precio;
-    categoria.value = anuncio.categoria_id ?? "";
+    categoriaActualId = anuncio.categoria_id ?? null;
+
+    if (categoriaActualId) {
+      categoria.value = categoriaActualId;
+    }
 
     imagenesActuales = anuncio.imagenes || [];
+    console.log("Imágenes actuales:", imagenesActuales);
+
+    if (!imagenesActuales.length) {
+      alert("⚠ Este anuncio no tiene imágenes asociadas.");
+    }
 
     if (previewActuales) {
       previewActuales.innerHTML = "";
@@ -123,10 +151,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       reader.readAsDataURL(file);
     });
 
-    this.value = ""; // para volver a cargar mismos archivos
+    this.value = "";
   });
 
-  // ✅ Enviar cambios
   document.getElementById("formEditarAnuncio").addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -135,7 +162,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       formData.append("titulo", titulo.value);
       formData.append("descripcion", descripcion.value);
       formData.append("precio", parseFloat(precio.value));
-      formData.append("categoria_id", parseInt(categoria.value) || "");
+
+      let catValue = categoria.value.trim();
+      let catIdToSend = parseInt(catValue);
+      if (!catValue || isNaN(catIdToSend)) {
+        catIdToSend = categoriaActualId;
+      }
+      formData.append("categoria_id", catIdToSend);
       formData.append("estado_id", 1);
 
       imagenesActuales.forEach(img => {
