@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Chat con vendedor</title>
+  <link rel="stylesheet" href="css/estilos_1/header.css">
+  <link rel="stylesheet" href="css/estilos_11/chat.css">
+  <link rel="stylesheet" href="css/estilos_1/footer.css">
+</head>
+<body>
+  <header class="navbar">
+        <img class="logo_facebook" src="img/logo_facebook.png" alt="logo_facebook">
+        <h1 class="navbar__title">!Marketplace!</h1>
+
+        <div class="navbar__buttons">
+            <nav class="menu">
+                <label class="menu-mobile-label" for="menu-switch">
+                    <i class="fa-solid fa-bars"></i>
+                        Menu
+                    </label>
+                    <input id="menu-switch" type="checkbox">
+                        <ul class="menu-links" id="menu-links">
+                            <li>
+                                <button  class="navbar__buttons__i"><a href="inicio_sesion.html">Iniciar sesion!</a></button>
+                            </li>
+                            <li>
+                                <button class="navbar__buttons__l"><a href="lista_anuncio.html">Lista anuncio</a></button>
+                            </li>
+                            <li>
+                                <button class="navbar__buttons__r"><a href="registrarse.html">Registrarse</a></button>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </header>
+            <hr>
+            <main>
+                <div id="anuncio-info"></div>
+
+                <div id="chat-box">
+                <div class="chat-header">
+                    <img id="anunciante-foto" src="img/default-user.png" alt="Foto anunciante" />
+                    <span id="anunciante-nombre">Anunciante</span>
+                </div>
+
+                <div id="mensajes"></div>
+                <textarea id="mensaje-input" placeholder="Escribe tu mensaje..."></textarea>
+                <button id="enviar">Enviar</button>
+                </div>
+            </main>
+            <script src="js/session.js"></script>
+            <script src="js/chat_anuncio.js"></script>
+    </body>
+</html>

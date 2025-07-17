@@ -1,0 +1,45 @@
+version: '3.8'
+
+networks:
+  app-network:
+    driver: bridge
+
+services:
+  postgres:
+    image: postgres:16
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: prueba_market
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: postgres
+      DB_USER: postgres
+      DB_PASSWORD: root
+      DB_DATABASE: prueba_market
+      DB_PORT: 5432
+      NODE_ENV: development
+      PORT: 3000
+      UPLOADS_PATH: /uploads
+    depends_on:
+      - postgres
+    volumes:
+      - ./files:/app/uploads
+    networks:
+      - app-network
+
+volumes:
+  pgdata:
