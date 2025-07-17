@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chat de Compras - Marketplace</title>
+
+  <link rel="stylesheet" href="css/estilos_1/header.css" />
+  <link rel="stylesheet" href="css/estilos_10/footer.css" />
+  <link rel="stylesheet" href="css/estilos_8/section.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+    <body>
+    <main class="contenedor-chat">
+        <header class="navbar">
+        <img class="logo_facebook" src="img/logo_facebook.png" alt="logo_facebook" />
+        <h1 class="navbar__title">Chat de Compras</h1>
+        <div class="navbar__buttons">
+            <nav class="menu">
+            <label class="menu-mobile-label" for="menu-switch">
+                <i class="fa-solid fa-bars"></i> Menu
+            </label>
+            <input id="menu-switch" type="checkbox" />
+            <ul class="menu-links" id="menu-links">
+                <li><button class="navbar__buttons__i"><a href="inicio_sesion.html">Iniciar sesión</a></button></li>
+                <li><button class="navbar__buttons__l"><a href="lista_anuncio.html">Lista anuncio</a></button></li>
+                <li><button class="navbar__buttons__r"><a href="registrarse.html">Registrarse</a></button></li>
+            </ul>
+            </nav>
+        </div>
+        </header>
+
+        <hr />
+
+        <div class="anuncios" id="conversaciones-lista">
+            <h2>Tus conversaciones</h2>
+        </div>
+
+        <section class="chat-section" id="chatSection">
+        <div class="chat-header">Conversación con <span id="userName">Usuario</span></div>
+        <div id="chat-mensajes" class="chat-mensajes"></div>
+        <input type="text" id="mensajeInput" placeholder="Enviar mensaje..." class="chat-input" />
+        <button id="enviarBtn" class="send-btn">Enviar</button>
+        </section>
+
+        <footer>
+        <div class="footer">
+            <p>Desarrollado por: <a href="#">Richard Parra Zegarra</a></p>
+        </div>
+        </footer>
+    </main>
+
+    <script src="js/session.js"></script>
+    <script src="js/chatCompra.js"></script>
+    </body>
+</html>
